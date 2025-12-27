@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class NoReason extends Model
 {
-    //
+    protected $fillable = ['reason'];
 }

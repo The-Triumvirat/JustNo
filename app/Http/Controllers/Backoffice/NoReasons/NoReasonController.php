@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers\Backoffice\NoReasons;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\NoReason;
+
+class NoReasonController extends Controller
+{
+    
+    public function index()
+    {
+        $noReasons = NoReason::all();
+        return view('backoffice.no-reasons.index', compact('noReasons'));
+    }
+
+    public function create()
+    {
+        return view('backoffice.no-reasons.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'reason' => 'required|string|max:512',
+        ]);
+
+        NoReason::create([
+            'reason' => $request->input('reason'),
+        ]);
+
+        return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason created successfully.');
+    }
+
+    public function edit($id)
+    {
+        $noReason = NoReason::findOrFail($id);
+        return view('backoffice.no-reasons.edit', compact('noReason'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'reason' => 'required|string|max:512',
+        ]);
+
+        $noReason = NoReason::findOrFail($id);
+        $noReason->update([
+            'reason' => $request->input('reason'),
+        ]);
+
+        return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $noReason = NoReason::findOrFail($id);
+        $noReason->delete();
+
+        return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason deleted successfully.');
+    }
+
+}

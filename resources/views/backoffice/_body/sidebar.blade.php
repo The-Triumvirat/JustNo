@@ -30,11 +30,17 @@
 
     <li class="menu-label">Your Backoffice</li>
     <li>
-      <a href="#">
-        <div class="parent-icon"><i class='bx bx-home-alt'></i>
+      <a href="{{ route('backoffice.no-reasons.index') }}">
+        <div class="parent-icon"><i class='bx bx-block'></i>
         </div>
-        <div class="menu-title">Pagetitle</div>
+        <div class="menu-title">No Reasons</div>
       </a>
+      <ul>
+        <li> <a href="{{ route('backoffice.no-reasons.index') }}"><i class='bx bx-radio-circle'></i>All No Reasons</a>
+        </li>
+        <li> <a href="{{ route('backoffice.no-reasons.create') }}"><i class='bx bx-radio-circle'></i>Add No Reasons</a>
+        </li>
+      </ul>
     </li>
 
     <li class="menu-label">Additional services</li>
