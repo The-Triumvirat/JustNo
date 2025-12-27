@@ -274,7 +274,7 @@
           <li>
             <div class="dropdown-divider mb-0"></div>
           </li>
-          <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
+          <li><a class="dropdown-item d-flex align-items-center" href="{{ route('backoffice.logout') }}"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
           </li>
         </ul>
       </div>
