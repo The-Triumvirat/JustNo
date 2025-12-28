@@ -84,4 +84,54 @@ class NoReasonController extends Controller
     {
         return view('backoffice.no-reasons.import');
     }
+
+    public function importNoReasonsStore(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:json'
+        ]);
+
+        try {
+            $data = json_decode(
+                file_get_contents($request->file('file')->path()),
+                true
+            );
+        } catch (\Throwable $e) {
+            return back()->with('error', 'JSON konnte nicht gelesen werden.');
+        }
+
+        if (!is_array($data)) {
+            return back()->with('error', 'Ungültiges JSON Format.');
+        }
+
+        $imported = 0;
+        $skipped = 0;
+
+        foreach ($data as $reason) {
+            $reason = trim($reason ?? '');
+
+            // Leere / zu kurze Werte ignorieren
+            if ($reason === '' || strlen($reason) < 3) {
+                $skipped++;
+                continue;
+            }
+
+            // Duplikate verhindern
+            if (NoReason::where('reason', $reason)->exists()) {
+                $skipped++;
+                continue;
+            }
+
+            NoReason::create(['reason' => $reason]);
+            $imported++;
+        }
+
+        $notification = array(
+            'message' => "Import abgeschlossen — Importiert: $imported | Übersprungen: $skipped",
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
 }

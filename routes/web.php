@@ -51,8 +51,9 @@ Route::middleware(['auth', 'role:admin'])
             Route::post('/update/{id}', [NoReasonController::class, 'update'])->name('update');
             Route::get('/destroy/{id}', [NoReasonController::class, 'destroy'])->name('destroy');
             
-           Route::get('/export', [NoReasonController::class, 'export'])->name('export');
-           Route::get('/import', [NoReasonController::class, 'importNoReasons'])->name('import.no.reasons');
+            Route::get('/export', [NoReasonController::class, 'export'])->name('export');
+            Route::get('/import', [NoReasonController::class, 'importNoReasons'])->name('import.no.reasons');
+            Route::post('/import', [NoReasonController::class, 'importNoReasonsStore'])->name('import.store');
         });
     }); // End Group Backoffice Middleware
 

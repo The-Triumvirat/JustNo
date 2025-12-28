@@ -25,20 +25,19 @@ Add Just No Reasons
   <div class="card">
     <div class="card-body p-4">
       <h5 class="mb-4">Import Just No Reasons</h5>
-      <form class="row g-3" action="#" method="post" enctype="multipart/form-data">
-                @csrf
+      <form class="row g-3" action="{{ route('backoffice.no-reasons.import.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
 
-                <div class="col-md-6">
-                  <label for="input1" class="form-label">JSON File Import</label>
-                  <input type="file" name="import_file" class="form-control">
-                </div>
+            <div class="col-md-6">
+              <label for="input1" class="form-label">JSON File Import</label>
+              <input type="file" name="file" class="form-control">
+            </div>
 
-                <div class="col-md-12">
-                  <div class="d-md-flex d-grid align-items-center gap-3">
+            <div class="col-md-12">
+                <div class="d-md-flex d-grid align-items-center gap-3">
                     <button type="submit" class="btn btn-primary px-4">Upload</button>
-
-                  </div>
                 </div>
+            </div>
         </form>
     </div>
   </div>
