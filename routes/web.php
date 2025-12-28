@@ -10,6 +10,9 @@ use App\Http\Controllers\BackofficeAuth\BackofficeLoginController;
 use App\Http\Controllers\BackofficeAuth\BackofficeLogoutController;
 use App\Http\Controllers\BackofficeAuth\BackofficeRestPasswordController;
 
+use App\Http\Controllers\BackofficeUser\BackofficeProfileController;
+use App\Http\Controllers\BackofficeUser\BackofficeChangePasswordController;
+
 use App\Http\Middleware\RedirectIfAuthenticatedCustom;
 
 Route::get('/', function () {
@@ -32,6 +35,13 @@ Route::middleware(['auth', 'role:admin'])
     ->group(function () {
         Route::get('/dashboard', [BackofficeController::class, 'backofficeDashboard'])->name('backoffice.dashboard');
         Route::get('/logout', [BackofficeLogoutController::class, 'backofficeLogout'])->name('backoffice.logout');
+        // Backoffice User manage profile data
+        Route::get('/profile', [BackofficeProfileController::class, 'backofficeProfile'])->name('backoffice.profile');
+        Route::post('/profile/store', [BackofficeProfileController::class, 'backofficeProfileStore'])->name('backoffice.profile.store');
+        // Backoffice User update password
+        Route::get('/change/password', [BackofficeChangePasswordController::class, 'backofficeChangePassword'])->name('backoffice.change.password');
+        Route::post('/password/update', [BackofficeChangePasswordController::class, 'backofficePasswordUpdate'])->name('backoffice.password.update');
+
 
         Route::prefix('/no-reasons')->name('backoffice.no-reasons.')->group(function () {
             Route::get('/', [NoReasonController::class, 'index'])->name('index');
