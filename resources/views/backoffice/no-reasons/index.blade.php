@@ -19,6 +19,14 @@ All Just No Reasons
     </div>
     <div class="ms-auto">
       <div class="btn-group">
+        <a href="{{ route('backoffice.no-reasons.export') }}" class="btn btn-danger px-5">Export </a>
+      </div>
+
+      <div class="btn-group">
+        <a href="{{ route('backoffice.no-reasons.import.no.reasons') }}" class="btn btn-warning px-5">Import </a>
+      </div>
+
+      <div class="btn-group">
         <a href="{{ route('backoffice.no-reasons.create') }}" class="btn btn-primary px-5">Add Just No Reasons </a>
       </div>
     </div>

@@ -61,4 +61,27 @@ class NoReasonController extends Controller
         return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason deleted successfully.');
     }
 
+    public function export()
+    {
+        $noReasons = NoReason::pluck('reason');
+
+        $filename = 'no_reasons_' . now()->format('Y-m-d_H-i-s') . '.json';
+
+        return response(
+            $noReasons->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE),
+            200,
+            [
+                'Content-Type' => 'application/json',
+                'Content-Disposition' => "attachment; filename=\"$filename\"",
+            ]
+        );
+    }
+
+    /**
+     * Import export No Reasons
+     */
+    public function importNoReasons()
+    {
+        return view('backoffice.no-reasons.import');
+    }
 }
