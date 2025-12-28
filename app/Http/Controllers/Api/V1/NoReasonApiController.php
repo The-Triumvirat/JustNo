@@ -13,6 +13,13 @@ class NoReasonApiController extends Controller
      */
     public function index()
     {
+        // 1% Easter Egg Chance
+        if (rand(1, 100) === 1) {
+            return response()->json([
+                'reason' => 'Fine... yes. Just this once. (Nah, still no. uwu)'
+            ]);
+        }
+        
         $reason = NoReason::inRandomOrder()->value('reason');
 
         return response()->json([
