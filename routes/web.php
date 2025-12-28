@@ -8,6 +8,7 @@ use App\Http\Controllers\Backoffice\NoReasons\NoReasonController;
 
 use App\Http\Controllers\BackofficeAuth\BackofficeLoginController;
 use App\Http\Controllers\BackofficeAuth\BackofficeLogoutController;
+use App\Http\Controllers\BackofficeAuth\BackofficeRestPasswordController;
 
 use App\Http\Middleware\RedirectIfAuthenticatedCustom;
 
