@@ -13,11 +13,11 @@ use App\Http\Controllers\BackofficeAuth\BackofficeRestPasswordController;
 use App\Http\Controllers\BackofficeUser\BackofficeProfileController;
 use App\Http\Controllers\BackofficeUser\BackofficeChangePasswordController;
 
+use App\Http\Controllers\Frontend\IndexController;
+
 use App\Http\Middleware\RedirectIfAuthenticatedCustom;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [IndexController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
