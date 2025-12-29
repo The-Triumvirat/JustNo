@@ -36,16 +36,16 @@ async function getNo() {
 
         if (res.status === 429) {
             const data = await res.json();
-            reasonBox.innerText = data.reason ?? "Too many requests – chill 😎";
+            reasonBox.innerText = data.reason ?? "Too many requests - chill";
             info.innerText = "Rate limit active";
             return;
         }
 
         const data = await res.json();
-        reasonBox.innerText = data.reason ?? "The API had no motivation 😅";
+        reasonBox.innerText = data.reason ?? "The API had no motivation to provide a reason :(";
 
     } catch {
-        reasonBox.innerText = "Something went wrong 🥲";
+        reasonBox.innerText = "Something went wrong :(";
         info.innerText = "";
     }
 }
