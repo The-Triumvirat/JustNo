@@ -110,28 +110,29 @@ class NoReasonController extends Controller
         foreach ($data as $reason) {
             $reason = trim($reason ?? '');
 
-            // Leere / zu kurze Werte ignorieren
-            if ($reason === '' || strlen($reason) < 3) {
+            // Ignore empty/too short values
+            if ($reason === '' || strlen($reason) < 2) {
                 $skipped++;
                 continue;
             }
 
-            // Duplikate verhindern
-            if (NoReason::where('reason', $reason)->exists()) {
-                $skipped++;
-                continue;
-            }
+            // Automatically performs insert OR detects duplicate via UNIQUE index
+            $entry = NoReason::firstOrCreate(['reason' => $reason]);
 
-            NoReason::create(['reason' => $reason]);
-            $imported++;
+            if ($entry->wasRecentlyCreated) {
+                $imported++;
+            } else {
+                $skipped++;
+            }
         }
 
-        $notification = array(
+        $notification = [
             'message' => "Import abgeschlossen — Importiert: $imported | Übersprungen: $skipped",
             'alert-type' => 'success'
-        );
+        ];
 
         return redirect()->back()->with($notification);
     }
+
 
 }
