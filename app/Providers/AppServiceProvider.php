@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        app()->instance('startTime', now());
+
         RateLimiter::for('justno', function ($request) {
         return Limit::perMinute(120)->by($request->ip());
     });
