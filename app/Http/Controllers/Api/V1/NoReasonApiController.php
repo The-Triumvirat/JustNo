@@ -26,4 +26,14 @@ class NoReasonApiController extends Controller
             'reason' => $reason ?? 'No reasons available yet.'
         ]);
     }
+
+    /**
+     * Count total No Reasons.
+     */
+    public function count()
+    {
+        return response()->json([
+            'count' => NoReason::count()
+        ]);
+    }
 }
