@@ -13,6 +13,7 @@ Route::prefix('v1')
     ->middleware('throttle:justno')
     ->group(function () {
     Route::get('no', [NoReasonApiController::class, 'index']);
+    Route::get('/no/count', [NoReasonApiController::class, 'count']);
 
     Route::get('tea', function () {
         return response()->json([
