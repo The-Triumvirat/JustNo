@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('no_reasons', function (Blueprint $table) {
             $table->id();
-            $table->text('reason');
+            $table->string('reason', 500)->unique();
             $table->timestamps();
         });
     }
