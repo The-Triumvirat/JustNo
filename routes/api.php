@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-Use App\Http\Controllers\Api\V1\NoReasonApiController;
+use App\Http\Controllers\Api\V1\NoReasonApiController;
+use App\Http\Controllers\Api\V1\StatusController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -22,4 +23,6 @@ Route::prefix('v1')
     Route::get('health', fn() =>
         response()->json(['status' => 'ok', 'mood' => 'still saying no to everything'])
     );
+
+    Route::get('/status', [StatusController::class, 'index']);
 });
