@@ -18,7 +18,12 @@
 
     <button onclick="getNo()">Give me another No</button>
 
-    <br>
+    <br><br>
+
+    <button onclick="copyNo()">Copy</button>
+    <button onclick="shareNo()">Share</button>
+
+    <br><br>
     <small id="info"></small>
 </div>
 
@@ -51,6 +56,52 @@ async function getNo() {
 }
 
 document.addEventListener('DOMContentLoaded', getNo);
+
+function copyNo() {
+    const text = document.getElementById('reason').innerText;
+
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            document.getElementById('info').innerText = "Copied to clipboard ✔️";
+        })
+        .catch(() => {
+            document.getElementById('info').innerText = "Copy failed";
+        });
+}
+
+function shareNo() {
+    const text = document.getElementById('reason').innerText;
+
+    if (navigator.share && navigator.canShare?.({ text })) {
+        navigator.share({
+            title: 'JustNo',
+            text: text,
+            url: window.location.href
+        })
+        .then(() => {
+            document.getElementById('info').innerText = "Shared successfully";
+        })
+        .catch((err) => {
+            document.getElementById('info').innerText =
+                err?.name === "AbortError"
+                ? "Share cancelled"
+                : "Share failed";
+        });
+
+    } else {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                document.getElementById('info').innerText =
+                    "Sharing not supported - copied instead";
+            })
+            .catch(() => {
+                document.getElementById('info').innerText =
+                    "Share not supported and copy failed";
+            });
+    }
+}
+
+
 </script>
 
 </body>
