@@ -16,14 +16,26 @@ class NoReasonApiController extends Controller
         // 1% Easter Egg Chance
         if (rand(1, 100) === 1) {
             return response()->json([
+                'id' => null,
                 'reason' => 'Fine... yes. Just this once. (Nah, still no. uwu)'
             ]);
         }
         
-        $reason = NoReason::inRandomOrder()->value('reason');
+        $reason = NoReason::inRandomOrder()->first(['id', 'reason']);
 
         return response()->json([
-            'reason' => $reason ?? 'No reasons available yet.'
+            'id' => $reason->id ?? null,
+            'reason' => $reason->reason ?? 'No reasons available yet.'
+        ]);
+    }
+
+    public function show($id)
+    {
+        $reason = NoReason::findOrFail($id);
+
+        return response()->json([
+            'id' => $reason->id,
+            'reason' => $reason->reason
         ]);
     }
 

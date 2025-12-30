@@ -14,6 +14,7 @@ Route::prefix('v1')
     ->group(function () {
     Route::get('no', [NoReasonApiController::class, 'index']);
     Route::get('/no/count', [NoReasonApiController::class, 'count']);
+    Route::get('/no/{id}', [NoReasonApiController::class, 'show']);
 
     Route::get('tea', function () {
         return response()->json([
