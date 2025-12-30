@@ -10,6 +10,7 @@ No complex dashboards.
 No “AI-powered enterprise synergy cloud platform”.  
 Just… **No.**
 
+*From here on, Readme has been written with AI because it is simple.*
 ---
 
 ## What is this?
