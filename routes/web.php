@@ -14,10 +14,13 @@ use App\Http\Controllers\BackofficeUser\BackofficeProfileController;
 use App\Http\Controllers\BackofficeUser\BackofficeChangePasswordController;
 
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\SpecificNoController;
 
 use App\Http\Middleware\RedirectIfAuthenticatedCustom;
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
+
+Route::get('/no/{id}', [SpecificNoController::class, 'show'])->name('no.specific');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

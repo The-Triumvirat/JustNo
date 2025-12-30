@@ -49,6 +49,9 @@ async function getNo() {
         const data = await res.json();
         reasonBox.innerText = data.reason ?? "The API had no motivation to provide a reason :(";
 
+        // store id for sharing
+        window.currentNoId = data.id ?? null;
+
     } catch {
         reasonBox.innerText = "Something went wrong :(";
         info.innerText = "";
@@ -71,35 +74,33 @@ function copyNo() {
 
 function shareNo() {
     const text = document.getElementById('reason').innerText;
+    const id = window.currentNoId;
 
-    if (navigator.share && navigator.canShare?.({ text })) {
+    // Easter egg or no-id fallback
+    if (!id) {
+        navigator.clipboard.writeText(text);
+        document.getElementById('info').innerText =
+            "No ID available – copied text instead ✔️";
+        return;
+    }
+
+    const url = window.location.origin + "/no/" + id;
+
+    if (navigator.share) {
         navigator.share({
-            title: 'JustNo',
+            title: "JustNo",
             text: text,
-            url: window.location.href
+            url: url
         })
-        .then(() => {
-            document.getElementById('info').innerText = "Shared successfully";
-        })
-        .catch((err) => {
-            document.getElementById('info').innerText =
-                err?.name === "AbortError"
-                ? "Share cancelled"
-                : "Share failed";
+        .catch(() => {
+            document.getElementById('info').innerText = "Share cancelled";
         });
 
     } else {
-        navigator.clipboard.writeText(text)
-            .then(() => {
-                document.getElementById('info').innerText =
-                    "Sharing not supported - copied instead";
-            })
-            .catch(() => {
-                document.getElementById('info').innerText =
-                    "Share not supported and copy failed";
-            });
+        navigator.clipboard.writeText(url);
+        document.getElementById('info').innerText = "Share link copied ✔️";
     }
-}
+}   
 
 
 </script>
