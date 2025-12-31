@@ -62,7 +62,7 @@ Route::middleware(['auth', 'role:admin'])
 
 // Route Accessable for All 
 Route::get('/backoffice/login', [BackofficeLoginController::class, 'backofficeLogin'])->name('backoffice.login')->middleware(RedirectIfAuthenticatedCustom::class);
-Route::post('/backoffice/login', [BackofficeLoginController::class, 'store'])->name('-*')->middleware(RedirectIfAuthenticatedCustom::class);
+Route::post('/backoffice/login', [BackofficeLoginController::class, 'store'])->name('backoffice.login.store')->middleware(RedirectIfAuthenticatedCustom::class);
 Route::get('/backoffice/forget', [BackofficeRestPasswordController::class, 'backofficeForgetPassword'])->name('backoffice.password.request')->middleware(RedirectIfAuthenticatedCustom::class);
 Route::get('/backoffice/reset-password/{token}', [BackofficeRestPasswordController::class, 'backofficeResetPassword'])->name('backoffice.password.reset')->middleware(RedirectIfAuthenticatedCustom::class);
 
