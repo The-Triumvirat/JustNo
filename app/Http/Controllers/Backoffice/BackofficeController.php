@@ -4,11 +4,38 @@ namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\NoReason;
+use Carbon\Carbon;
+use DB;
 
 class BackofficeController extends Controller
 {
     public function backofficeDashboard()
     {
-        return view('backoffice.index');
+        // Total Nos
+        $totalNos = NoReason::count();
+
+        // Nos today
+        $nosToday = NoReason::whereDate('created_at', today())->count();
+
+        // DB Check + Latenz
+        $start = microtime(true);
+        try {
+            \DB::select('SELECT 1');
+            $dbOk = true;
+        } catch (\Throwable $e) {
+            $dbOk = false;
+        }
+        $dbMs = round((microtime(true) - $start) * 1000);
+
+        // Queue (minimal)
+        try {
+            $queueSize = \Queue::size('default');
+            $queueStatus = $queueSize . ' jobs';
+        } catch (\Throwable $e) {
+            $queueStatus = 'not available';
+        }
+
+        return view('backoffice.index', compact('totalNos', 'nosToday', 'dbOk', 'dbMs', 'queueStatus'));
     } // End Method
 }
