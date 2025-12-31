@@ -71,22 +71,11 @@ Backoffice Dashboard
     <div class="card-header">
       <div class="d-flex align-items-center">
         <div>
-          <h6 class="mb-0">Recent Orders</h6>
+          <h6 class="mb-0">Last 10 Nos</h6>
         </div>
         <div class="dropdown ms-auto">
           <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="javascript:;">Action</a>
-            </li>
-            <li><a class="dropdown-item" href="javascript:;">Another action</a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -95,19 +84,28 @@ Backoffice Dashboard
         <table class="table align-middle mb-0">
           <thead class="table-light">
             <tr>
-            <th>Course</th>
-              <th>Course ID</th>
-              <th>Course Price</th>
-              <th>Total Price</th>
-              <th>Payment type</th>
+              <th>ID</th>
+              <th>Reason</th>
               <th>Date</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
-
+            @forelse($lastNos as $no)
+            <tr>
+              <td>{{ $no->id }}</td>
+              <td>{{ $no->reason }}</td>
+              <td>{{ $no->created_at->format('Y-m-d H:i') }}</td>
+              <td><span class="badge bg-success">OK</span></td>
+            </tr>
+            @empty
+            <tr>
+              <td colspan="4" class="text-center text-muted">
+                No entries yet.
+              </td>
+            </tr>
+          @endforelse
             
-
           </tbody>
         </table>
       </div>

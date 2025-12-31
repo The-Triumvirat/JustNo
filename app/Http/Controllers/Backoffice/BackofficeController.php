@@ -36,6 +36,9 @@ class BackofficeController extends Controller
             $queueStatus = 'not available';
         }
 
-        return view('backoffice.index', compact('totalNos', 'nosToday', 'dbOk', 'dbMs', 'queueStatus'));
+        // Last 10 Nos
+        $lastNos = NoReason::orderByDesc('id')->limit(10)->get()->sortBy('id');
+
+        return view('backoffice.index', compact('totalNos', 'nosToday', 'dbOk', 'dbMs', 'queueStatus', 'lastNos'));
     } // End Method
 }
