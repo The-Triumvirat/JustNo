@@ -14,7 +14,7 @@ Backoffice Reset Password
     </div>
     <div class="form-body">
 
-        <form class="row g-3" method="POST" action="{{ route('password.store') }}">
+        <form class="row g-3" method="POST" action="{{ route('backoffice.password.update') }}">
             @csrf
 
             <!-- Password Reset Token -->

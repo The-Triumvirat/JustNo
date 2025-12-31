@@ -67,7 +67,9 @@ Route::post('/backoffice/login', [BackofficeLoginController::class, 'store'])->n
 
 Route::get('/backoffice/forget', [BackofficeForgetPasswordController::class, 'backofficeForgetPassword'])->name('backoffice.password.request')->middleware(RedirectIfAuthenticatedCustom::class);
 Route::post('/backoffice/forget-password', [BackofficeForgetPasswordController::class, 'backofficeForgetPasswordStore'])->name('backoffice.password.email.store')->middleware(RedirectIfAuthenticatedCustom::class);
+
 Route::get('/backoffice/reset-password/{token}', [BackofficeRestPasswordController::class, 'backofficeResetPassword'])->name('backoffice.password.reset')->middleware(RedirectIfAuthenticatedCustom::class);
+Route::post('/backoffice/reset-password', [BackofficeRestPasswordController::class, 'backofficePasswordUpdate'])->name('backoffice.password.update')->middleware(RedirectIfAuthenticatedCustom::class);
 
 // Mayby needed later
 //require __DIR__.'/auth.php';
