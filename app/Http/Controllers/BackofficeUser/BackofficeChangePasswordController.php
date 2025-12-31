@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackofficeUser;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,21 +19,14 @@ class BackofficeChangePasswordController extends Controller
         return view('backoffice.profile.backoffice_change_password', compact('profileData'));
     } // End Method
 
-    public function backofficePasswordUpdate(Request $request)
+    public function backofficePasswordUpdate(Request $request): RedirectResponse
     {
         // Validation 
         $request->validate([
-            'old_password' => 'required',
+            'old_password' => ['required', 'current_password'],
             'new_password' => 'required|confirmed'
         ]);
-        if (!Hash::check($request->old_password, auth::user()->password)) {
-            $notification = array(
-                'message' => 'Old Password Does not Match!',
-                'alert-type' => 'error'
-            );
 
-            return back()->with($notification);
-        }
         /// Update The New Password 
         User::whereId(auth::user()->id)->update([
             'password' => Hash::make($request->new_password)
@@ -42,6 +36,7 @@ class BackofficeChangePasswordController extends Controller
             'message' => 'Password Change Successfully',
             'alert-type' => 'success'
         );
+
         return back()->with($notification);
     } // End Method
 }
