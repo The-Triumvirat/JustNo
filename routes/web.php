@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backoffice\BackofficeController;
 use App\Http\Controllers\Backoffice\NoReasons\NoReasonController;
 
+use App\Http\Controllers\BackofficeAuth\BackofficeForgetPasswordController;
 use App\Http\Controllers\BackofficeAuth\BackofficeLoginController;
 use App\Http\Controllers\BackofficeAuth\BackofficeLogoutController;
 use App\Http\Controllers\BackofficeAuth\BackofficeRestPasswordController;
@@ -63,7 +64,9 @@ Route::middleware(['auth', 'role:admin'])
 // Route Accessable for All 
 Route::get('/backoffice/login', [BackofficeLoginController::class, 'backofficeLogin'])->name('backoffice.login')->middleware(RedirectIfAuthenticatedCustom::class);
 Route::post('/backoffice/login', [BackofficeLoginController::class, 'store'])->name('backoffice.login.store')->middleware(RedirectIfAuthenticatedCustom::class);
-Route::get('/backoffice/forget', [BackofficeRestPasswordController::class, 'backofficeForgetPassword'])->name('backoffice.password.request')->middleware(RedirectIfAuthenticatedCustom::class);
+
+Route::get('/backoffice/forget', [BackofficeForgetPasswordController::class, 'backofficeForgetPassword'])->name('backoffice.password.request')->middleware(RedirectIfAuthenticatedCustom::class);
+Route::post('/backoffice/forget-password', [BackofficeForgetPasswordController::class, 'backofficeForgetPasswordStore'])->name('backoffice.password.email.store')->middleware(RedirectIfAuthenticatedCustom::class);
 Route::get('/backoffice/reset-password/{token}', [BackofficeRestPasswordController::class, 'backofficeResetPassword'])->name('backoffice.password.reset')->middleware(RedirectIfAuthenticatedCustom::class);
 
 // Mayby needed later
