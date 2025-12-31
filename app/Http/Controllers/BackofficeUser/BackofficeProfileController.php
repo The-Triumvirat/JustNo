@@ -5,11 +5,12 @@ namespace App\Http\Controllers\BackofficeUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use App\Models\User;
 
 class BackofficeProfileController extends Controller
 {
-    public function backofficeProfile()
+    public function backofficeProfile(): View
     {
         $id = Auth::user()->id;
         $profileData = User::find($id);

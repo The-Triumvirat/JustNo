@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use App\Models\NoReason;
 use Carbon\Carbon;
 use DB;
 
 class BackofficeController extends Controller
 {
-    public function backofficeDashboard()
+    public function backofficeDashboard(): View
     {
         // Total Nos
         $totalNos = NoReason::count();

@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Backoffice\NoReasons;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NoReason;
+use Illuminate\View\View;
 
 class NoReasonController extends Controller
 {
     
-    public function index()
+    public function index(): View
     {
         $noReasons = NoReason::all();
         return view('backoffice.no-reasons.index', compact('noReasons'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('backoffice.no-reasons.create');
     }
@@ -33,7 +34,7 @@ class NoReasonController extends Controller
         return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason created successfully.');
     }
 
-    public function edit($id)
+    public function edit($id): View
     {
         $noReason = NoReason::findOrFail($id);
         return view('backoffice.no-reasons.edit', compact('noReason'));
@@ -80,7 +81,7 @@ class NoReasonController extends Controller
     /**
      * Import export No Reasons
      */
-    public function importNoReasons()
+    public function importNoReasons(): View
     {
         return view('backoffice.no-reasons.import');
     }

@@ -7,11 +7,12 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use App\Models\User;
 
 class BackofficeLoginController extends Controller
 {
-    public function backofficeLogin()
+    public function backofficeLogin(): View
     {
         return view('backoffice.auth.backoffice_login');
     } // End Method

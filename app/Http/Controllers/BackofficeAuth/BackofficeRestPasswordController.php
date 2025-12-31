@@ -15,7 +15,7 @@ use Illuminate\View\View;
 
 class BackofficeRestPasswordController extends Controller
 {
-    public function backofficeResetPassword(Request $request)
+    public function backofficeResetPassword(Request $request): View
     {
         return view('backoffice.auth.backoffice_reset_password', ['request' => $request]);
     } // End 
