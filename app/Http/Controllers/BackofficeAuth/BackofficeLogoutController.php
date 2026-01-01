@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\BackofficeAuth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BackofficeLogoutController extends Controller
 {
-    public function backofficeLogout(Request $request)
+    public function backofficeLogout(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
         $request->session()->invalidate();
