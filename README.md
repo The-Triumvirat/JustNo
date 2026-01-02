@@ -10,6 +10,13 @@ No complex dashboards.
 No “AI-powered enterprise synergy cloud platform”.  
 Just… **No.**
 
+## Trigger warning:
+
+This project is written in ***PHP***.
+
+If that ruins your day, close this tab and go do something else.  
+And no, we’re not rebuilding it in your favorite language — don’t even file an issue.
+
 *From here on, Readme has been written with AI because it is simple.*
 ---
 
