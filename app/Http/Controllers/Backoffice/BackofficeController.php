@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\View\View;
 use App\Models\NoReason;
-use Carbon\Carbon;
 use DB;
 
 class BackofficeController extends Controller
@@ -22,7 +22,7 @@ class BackofficeController extends Controller
         // DB Check + Latenz
         $start = microtime(true);
         try {
-            \DB::select('SELECT 1');
+            DB::select('SELECT 1');
             $dbOk = true;
         } catch (\Throwable $e) {
             $dbOk = false;
@@ -31,7 +31,7 @@ class BackofficeController extends Controller
 
         // Queue (minimal)
         try {
-            $queueSize = \Queue::size('default');
+            $queueSize = Queue::size('default');
             $queueStatus = $queueSize . ' jobs';
         } catch (\Throwable $e) {
             $queueStatus = 'not available';
