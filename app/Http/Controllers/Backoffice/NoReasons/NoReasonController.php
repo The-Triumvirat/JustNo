@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\NoReason;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class NoReasonController extends Controller
@@ -63,7 +64,7 @@ class NoReasonController extends Controller
         return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason deleted successfully.');
     }
 
-    public function export()
+    public function export(): Response
     {
         $noReasons = NoReason::pluck('reason');
 
