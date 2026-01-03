@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Models\NoReason;
 
 class NoReasonApiController extends Controller
@@ -11,7 +12,7 @@ class NoReasonApiController extends Controller
     /**
      * Display a random No Reason.
      */
-    public function index()
+    public function index(): JsonResponse
     {
         // 1% Easter Egg Chance
         if (rand(1, 100) === 1) {
@@ -29,7 +30,7 @@ class NoReasonApiController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($id): JsonResponse
     {
         $reason = NoReason::findOrFail($id);
 
@@ -42,7 +43,7 @@ class NoReasonApiController extends Controller
     /**
      * Count total No Reasons.
      */
-    public function count()
+    public function count(): JsonResponse
     {
         return response()->json([
             'count' => NoReason::count()
