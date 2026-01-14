@@ -18,7 +18,8 @@ Route::prefix('v1')
 
     Route::get('tea', function () {
         return response()->json([
-            'message' => "Nope. I'm a teapot",
+            'id' => 42,
+            'reason' => "Nope. I'm a teapot",
         ], 418);
     });
 
