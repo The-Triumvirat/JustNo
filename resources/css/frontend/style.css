@@ -29,6 +29,8 @@ body {
     border: 1px solid rgba(98, 193, 191, 0.35);
 }
 .card h1 {
+    font-size: 2em;
+    font-weight: 700;
     margin-bottom: 10px;
     color: #62c1bf;
     letter-spacing: 1px;

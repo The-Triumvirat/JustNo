@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>JustNo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('frontend/style.css') }}" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
