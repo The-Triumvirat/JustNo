@@ -16,11 +16,20 @@
         Loading your No…
     </div>
 
-    <button onclick="copyNo()">Copy</button>
-    <button onclick="shareNo()">Share</button>
+    <div class="buttons">
+        <!-- Secondary Row -->
+        <div class="action-row-half">
+            <div>
+                <button class="btn-secondary" onclick="copyNo()">Copy</button>
+            </div>
+            <div>
+                <button class="btn-secondary" onclick="shareNo()">Share</button>
+            </div>
+        </div>
 
-    <br><br>
-    <small id="info"></small>
+        <br>
+        <small id="info"></small>
+    </div>
 </div>
 
 

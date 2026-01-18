@@ -19,6 +19,7 @@ body {
 .card {
     background: rgba(17, 24, 39, 0.92);
     padding: 30px;
+    margin: 30px;
     border-radius: 14px;
     width: 420px;
     text-align: center;
@@ -38,9 +39,26 @@ body {
     min-height: 65px;
     margin: 18px 0;
 }
-.card button {
+.card .buttons {
+    margin-top: 24px;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.card .buttons .action-row-full {
+    margin-bottom: 25px;
+}
+.card .buttons .action-row-half {
+    display: flex;
+    gap: 25px;
+}
+.card .buttons .action-row-half > div {
+    flex: 1; /* 50% / 50% */
+}
+.card .buttons button {
     background: #62c1bf;
     color: #021111;
+    width: 100%;
     font-weight: bold;
     padding: 10px 22px;
     border-radius: 8px;
@@ -48,11 +66,21 @@ body {
     cursor: pointer;
     transition: all .2s ease;
 }
-.card button:hover {
+.card .buttons button:hover {
     background: #44acaa;
     box-shadow: 0 0 15px rgba(98, 193, 191, .6);
     transform: translateY(-1px);
 }
-.card small {
+.card .buttons button:focus-visible {
+    outline: 2px solid #87cfce;
+    outline-offset: 2px;
+}
+.card .buttons small {
     color: #8faeac;
+}
+
+@media (max-width: 400px) {
+    .card .buttons .action-row-half {
+        flex-direction: column;
+    }
 }

@@ -16,16 +16,24 @@
         Loading your No…
     </div>
 
-    <button onclick="getNo()">Give me another No</button>
+    <div class="buttons">
+        <!-- Primary Row -->
+        <div class="action-row-full">
+            <button class="btn-primary" onclick="getNo()">Give me another No</button>
+        </div>
 
-    <br><br>
-
-    <button onclick="copyNo()">Copy</button>
-    <button onclick="shareNo()">Share</button>
-
-    <br><br>
-    <small id="info"></small>
-</div>
+        <!-- Secondary Row -->
+        <div class="action-row-half">
+            <div>
+                <button class="btn-secondary" onclick="copyNo()">Copy</button>
+            </div>
+            <div>
+                <button class="btn-secondary" onclick="shareNo()">Share</button>
+            </div>
+        </div>
+        <br>
+        <small id="info"></small>
+    </div>
 
 
 <script>
