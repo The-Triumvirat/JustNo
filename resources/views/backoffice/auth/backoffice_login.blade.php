@@ -10,7 +10,7 @@ Backoffice Login
 
     <!-- Header / Logo -->
     <div class="bg-trium-bg2 p-6 flex flex-col items-center justify-center border-b border-trium-border">
-        <img src="{{ asset('backoffice/assets/images/logo-icon.png') }}" width="60" alt="">
+        <img src="{{ url('brand/tt-lion.png') }}" alt="TT Lion" width="120">
         <h1 class="mt-4 text-lg text-trium-300 font-semibold">Backoffice Login</h1>
         <p class="text-sm text-trium-sub">Please log in to your account</p>
     </div>
