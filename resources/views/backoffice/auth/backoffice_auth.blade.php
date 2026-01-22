@@ -18,6 +18,8 @@
         @yield('backofficeAuthPage')
     </div>
 
+    <script src="{{ asset('backoffice/custom/js/jquery371.min.js') }}"></script>
+
     @include('shared.message')
 
 </body>
