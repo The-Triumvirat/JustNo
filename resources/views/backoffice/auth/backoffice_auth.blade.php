@@ -14,7 +14,7 @@
 <body class="bg-trium-bg text-trium-text min-h-screen flex items-center justify-center">
 
     
-    <div class="flex w-full justify-center max-w-md">
+    <div class="flex w-full justify-center max-w-lg p-6">
         @yield('backofficeAuthPage')
     </div>
 
