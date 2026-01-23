@@ -9,7 +9,11 @@ Backoffice Forget Password
 
     <!-- Header / Logo -->
     <div class="bg-trium-bg2 p-6 flex flex-col items-center justify-center border-b border-trium-border">
-        <img src="{{ asset('backoffice/assets/images/logo-icon.png') }}" width="60" alt="">
+        <img 
+            src="{{ url('brand/tt-lion.png') }}"
+            alt="TT Lion"
+            draggable="false"
+            class="mx-auto block max-w-[120px] w-auto select-none">
         <h1 class="mt-4 text-lg text-trium-300 font-semibold">Backoffice Forget Password</h1>
         <p class="text-sm text-trium-sub">Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</p>
     </div>

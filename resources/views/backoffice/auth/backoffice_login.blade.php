@@ -10,7 +10,11 @@ Backoffice Login
 
     <!-- Header / Logo -->
     <div class="bg-trium-bg2 p-6 flex flex-col items-center justify-center border-b border-trium-border">
-        <img src="{{ url('brand/tt-lion.png') }}" alt="TT Lion" width="120">
+        <img 
+            src="{{ url('brand/tt-lion.png') }}"
+            alt="TT Lion"
+            draggable="false"
+            class="mx-auto block max-w-[120px] w-auto select-none">
         <h1 class="mt-4 text-lg text-trium-300 font-semibold">Backoffice Login</h1>
         <p class="text-sm text-trium-sub">Please log in to your account</p>
     </div>
@@ -30,10 +34,9 @@ Backoffice Login
                     class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2
                            focus:ring-2 focus:ring-trium-400 outline-none
                            @error('login') border-red-500 @enderror"
-                    placeholder="john@example.com"
-                >
+                    placeholder="john@example.com">
                 @error('login')
-                    <div class="text-red-400 text-sm mt-1">{{ $message }}</div>
+                <div class="text-red-400 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -48,8 +51,7 @@ Backoffice Login
                         class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2 pr-10
                                focus:ring-2 focus:ring-trium-400 outline-none
                                @error('password') border-red-500 @enderror"
-                        placeholder="Enter password"
-                    >
+                        placeholder="Enter password">
 
                     <button type="button"
                         onclick="togglePassword()"
@@ -59,7 +61,7 @@ Backoffice Login
                 </div>
 
                 @error('password')
-                    <div class="text-red-400 text-sm mt-1">{{ $message }}</div>
+                <div class="text-red-400 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -72,7 +74,7 @@ Backoffice Login
                 </label>
 
                 <a href="{{ route('backoffice.password.request') }}"
-                   class="text-trium-300 hover:text-trium-400 transition">
+                    class="text-trium-300 hover:text-trium-400 transition">
                     Forgot password?
                 </a>
             </div>
