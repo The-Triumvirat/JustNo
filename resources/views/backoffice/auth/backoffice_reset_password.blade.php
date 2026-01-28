@@ -1,60 +1,111 @@
+@extends('backoffice.auth.backoffice_auth')
+
 @section('titleAuthPage')
 Backoffice Reset Password
 @endsection
 
-@extends('backoffice.auth.backoffice_auth')
 @section('backofficeAuthPage')
-<div class="">
-    <div class="mb-3 text-center">
-        <img src="{{ asset('backoffice/assets/images/logo-icon.png') }}" width="60" alt="">
-    </div>
-    <div class="text-center mb-4">
-        <h5 class="">Backoffice Reset Your Password </h5>
-        <p class="mb-0">Type here your new password</p>
-    </div>
-    <div class="form-body">
 
-        <form class="row g-3" method="POST" action="{{ route('backoffice.password.update') }}">
+<div class="w-[380px] bg-trium-panel border border-trium-border rounded-xl shadow-trium-soft overflow-hidden">
+
+    <!-- Header -->
+    <div class="bg-trium-bg2 p-6 text-center border-b border-trium-border">
+        <img 
+            src="{{ url('brand/tt-lion.png') }}"
+            alt="TT Lion"
+            draggable="false"
+            class="mx-auto block max-w-[120px] w-auto select-none">
+        <h1 class="text-lg text-trium-300 font-semibold">Reset your password</h1>
+        <p class="text-sm text-trium-sub">Type your new password below</p>
+    </div>
+
+    <!-- Form -->
+    <div class="p-6">
+        <form method="POST" action="{{ route('backoffice.password.update') }}" class="space-y-4">
             @csrf
 
-            <!-- Password Reset Token -->
+            <!-- Token -->
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <div class="col-12">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="jhon@example.com">
+            {{-- Email --}}
+            <div>
+                <label class="text-sm text-trium-sub">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ old('email', $request->email) }}"
+                    class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2
+                           focus:ring-2 focus:ring-trium-400 outline-none
+                           @error('email') border-red-500 @enderror"
+                    placeholder="john@example.com">
                 @error('email')
-                <span class="text-danger">{{ $message }}</span>
+                <div class="text-red-400 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div class="col-12">
-                <label for="inputChoosePassword" class="form-label">Password</label>
-                <div class="input-group" id="show_hide_password">
-                    <input type="password" name="password" id="password" class="form-control border-end-0 @error('password') is-invalid @enderror" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class="bx bx-hide"></i></a>
-                    @error('password')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
+            {{-- Password --}}
+            <div>
+                <label class="text-sm text-trium-sub">New password</label>
+                <div class="relative">
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2 pr-10
+                               focus:ring-2 focus:ring-trium-400 outline-none
+                               @error('password') border-red-500 @enderror"
+                        placeholder="Enter new password">
+                    <button type="button"
+                        onclick="togglePassword('password')"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-trium-sub hover:text-trium-300">
+                        👁
+                    </button>
                 </div>
+                @error('password')
+                <div class="text-red-400 text-sm mt-1">{{ $message }}</div>
+                @enderror
             </div>
 
-            <div class="col-12">
-                <label for="password_confirmation" class="form-label">Confirm Password</label>
-                <div class="input-group" id="show_hide_password">
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control border-end-0 @error('password_confirmation') is-invalid @enderror" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class="bx bx-hide"></i></a>
-                    @error('password_confirmation')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
+            {{-- Confirm --}}
+            <div>
+                <label class="text-sm text-trium-sub">Confirm password</label>
+                <div class="relative">
+                    <input
+                        id="password_confirmation"
+                        type="password"
+                        name="password_confirmation"
+                        class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2 pr-10
+                               focus:ring-2 focus:ring-trium-400 outline-none
+                               @error('password_confirmation') border-red-500 @enderror"
+                        placeholder="Repeat password">
+                    <button type="button"
+                        onclick="togglePassword('password_confirmation')"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-trium-sub hover:text-trium-300">
+                        👁
+                    </button>
                 </div>
+                @error('password_confirmation')
+                <div class="text-red-400 text-sm mt-1">{{ $message }}</div>
+                @enderror
             </div>
 
-            <div class="col-12">
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Reset Password</button>
-                </div>
-            </div>
+            {{-- Submit --}}
+            <button
+                type="submit"
+                class="w-full bg-trium-400 hover:bg-trium-500 text-black font-semibold py-2 rounded-lg transition">
+                Reset password
+            </button>
+
         </form>
     </div>
 
 </div>
+
+<script>
+    function togglePassword(id) {
+        const input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
+    }
+</script>
+
 @endsection
