@@ -10,12 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Mirror push to Codeberg
+      - name: Setup SSH
         run: |
-          git remote add codeberg https://${{ secrets.CODEBERG_USERNAME }}:${{ secrets.CODEBERG_TOKEN }}@codeberg.org/The-Triumvirat/JustNo.git
+          mkdir -p ~/.ssh
+          echo "${{ secrets.CODEBERGPRIVATE }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan codeberg.org >> ~/.ssh/known_hosts
+
+      - name: Mirror push
+        run: |
+          git remote add codeberg git@codeberg.org:The-Triumvirat/JustNo.git
           git push --mirror codeberg
