@@ -10,6 +10,10 @@
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
+  @vite(['resources/css/backoffice/app.css', 'resources/js/app.js'])
+  <!-- legacy bootstrap -->
+
   <!--tagsinput-->
   <link href="{{ asset('backoffice/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
   <!--tagsinput-->

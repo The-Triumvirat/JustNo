@@ -8,10 +8,10 @@
     <link rel="icon" href="{{ asset('brand/tt-lion.png') }}" type="image/png" />
     <link href="{{ asset('backoffice/custom/css/toastr.css') }}" rel="stylesheet">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/backoffice/auth.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-trium-bg text-trium-text min-h-screen flex items-center justify-center">
+<body class="bg-auth-gradient text-trium-text min-h-screen flex items-center justify-center">
 
     
     <div class="flex w-full justify-center max-w-lg p-6">
