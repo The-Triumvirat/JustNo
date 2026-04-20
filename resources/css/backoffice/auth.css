@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 @layer utilities {
-    .bg-auth-gradient {
-        background:
-            radial-gradient(
-                circle at top,
-                rgba(98, 193, 191, 0.18),
-                transparent 60%
-            ),
-            linear-gradient(
-                to bottom,
-                #0b1014,
-                #000
-            );
-    }
+  .bg-auth-gradient {
+    background:
+      radial-gradient(
+        circle at top,
+        rgba(98, 193, 191, 0.18),
+        transparent 60%
+      ),
+      linear-gradient(
+        to bottom,
+        #0b1014,
+        #000
+      );
+  }
 }
