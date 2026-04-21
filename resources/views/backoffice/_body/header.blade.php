@@ -1,21 +1,17 @@
-<header class="sticky top-0 z-40 h-16 border-b border-trium-border bg-trium-panel">
-    <nav class="flex h-full items-center justify-between px-4 lg:px-6">
+<header class="jn-topbar">
+    <nav class="jn-topbar-inner">
 
-        {{-- LEFT: Menu + Search --}}
-        <div class="flex items-center gap-4">
-
-            {{-- Mobile Sidebar Toggle --}}
+        <div class="jn-topbar-group">
             <button
                 @click="sidebarOpen = true"
                 type="button"
-                class="rounded-lg p-2 text-2xl text-trium-text transition-colors hover:bg-trium-bg2 hover:text-trium-400 lg:hidden"
+                class="jn-topbar-icon-btn-strong lg:hidden"
                 aria-label="Open sidebar">
                 <i class='bx bx-menu'></i>
             </button>
 
-            {{-- Desktop Search --}}
-            <div class="relative hidden lg:block group">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-trium-sub group-focus-within:text-trium-400">
+            <div class="jn-topbar-search-wrap group">
+                <span class="jn-topbar-search-icon group-focus-within:text-trium-400">
                     <i class='bx bx-search text-xl'></i>
                 </span>
 
@@ -23,40 +19,31 @@
                     type="text"
                     readonly
                     placeholder="Search coming later"
-                    class="block w-80 rounded-lg border border-trium-border bg-trium-bg2 p-2 pl-10 text-sm text-trium-text transition-all focus:border-trium-400 focus:ring-1 focus:ring-trium-400">
+                    class="jn-topbar-search">
             </div>
         </div>
 
         @php($profileData = Auth::user())
 
-        {{-- RIGHT: Actions --}}
-        <div class="flex items-center gap-2 lg:gap-4">
+        <div class="jn-topbar-actions">
 
-            {{-- Mobile Search Button --}}
             <button
                 type="button"
-                class="rounded-lg p-2 text-trium-sub transition-colors hover:bg-trium-bg2 hover:text-trium-400 lg:hidden"
+                class="jn-topbar-icon-btn lg:hidden"
                 aria-label="Search">
                 <i class='bx bx-search text-2xl'></i>
             </button>
 
-            {{-- Notifications --}}
             <div class="relative" x-data="{ open: false }">
-
                 <button
                     @click="open = !open"
                     type="button"
-                    class="relative rounded-lg p-2 text-trium-sub transition-colors hover:bg-trium-bg2 hover:text-trium-400"
+                    class="jn-topbar-icon-btn relative"
                     aria-label="Notifications">
                     <i class='bx bx-bell text-2xl'></i>
-
-                    {{-- Counter --}}
-                    <span class="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-sm">
-                        2
-                    </span>
+                    <span class="jn-topbar-counter">2</span>
                 </button>
 
-                {{-- Dropdown --}}
                 <div
                     x-show="open"
                     x-cloak
@@ -65,9 +52,9 @@
                     x-transition:enter-start="transform scale-95 opacity-0"
                     x-transition:leave="transition ease-in duration-75"
                     x-transition:leave-end="transform scale-95 opacity-0"
-                    class="absolute right-0 z-50 mt-2 w-80 overflow-hidden rounded-xl border border-trium-border bg-trium-panel shadow-trium">
-                    <div class="border-b border-trium-border bg-trium-bg2/50 px-4 py-3">
-                        <p class="text-sm font-semibold text-trium-text">Benachrichtigungen</p>
+                    class="jn-topbar-dropdown w-80">
+                    <div class="jn-topbar-dropdown-head">
+                        <p class="jn-topbar-dropdown-title">Benachrichtigungen</p>
                     </div>
 
                     <div class="max-h-64 overflow-y-auto">
@@ -94,9 +81,7 @@
                 </div>
             </div>
 
-            {{-- Profile --}}
-            <div class="relative ml-2 border-l border-trium-border pl-4" x-data="{ open: false }">
-
+            <div class="jn-topbar-profile-wrap" x-data="{ open: false }">
                 <button
                     @click="open = !open"
                     type="button"
@@ -112,11 +97,10 @@
 
                     <img
                         src="{{ !empty($profileData->photo) ? url('upload/profile_images/'.$profileData->photo) : url('upload/no_image.jpg') }}"
-                        class="h-10 w-10 rounded-xl border-2 border-trium-border object-cover shadow-sm transition-all group-hover:border-trium-400"
+                        class="jn-topbar-avatar"
                         alt="User avatar">
                 </button>
 
-                {{-- Dropdown --}}
                 <div
                     x-show="open"
                     x-cloak
@@ -125,29 +109,24 @@
                     x-transition:enter-start="transform scale-95 opacity-0"
                     x-transition:leave="transition ease-in duration-75"
                     x-transition:leave-end="transform scale-95 opacity-0"
-                    class="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-trium-border bg-trium-panel shadow-trium">
+                    class="jn-topbar-dropdown w-56">
                     <div class="space-y-1 p-2">
-
-                        <a href="{{ route('backoffice.profile') }}"
-                            class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-trium-text transition-all hover:bg-trium-400/10 hover:text-trium-400">
+                        <a href="{{ route('backoffice.profile') }}" class="jn-topbar-menu-link">
                             <i class="bx bx-user text-lg"></i>
                             Profil
                         </a>
 
-                        <a href="{{ route('backoffice.change.password') }}"
-                            class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-trium-text transition-all hover:bg-trium-400/10 hover:text-trium-400">
+                        <a href="{{ route('backoffice.change.password') }}" class="jn-topbar-menu-link">
                             <i class="bx bx-lock text-lg"></i>
                             Passwort ändern
                         </a>
 
-                        <hr class="my-1 border-trium-border">
+                        <hr class="jn-topbar-divider">
 
-                        <a href="{{ route('backoffice.logout') }}"
-                            class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-red-400 transition-all hover:bg-red-400/10">
+                        <a href="{{ route('backoffice.logout') }}" class="jn-topbar-menu-link-danger">
                             <i class="bx bx-log-out-circle text-lg"></i>
                             Logout
                         </a>
-
                     </div>
                 </div>
             </div>
