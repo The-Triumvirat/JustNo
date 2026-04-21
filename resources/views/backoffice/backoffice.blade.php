@@ -11,50 +11,52 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     @vite(['resources/css/backoffice/app.css', 'resources/js/app.js'])
 
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.min.js"></script>
-    <!-- legacy bootstrap -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    {{-- Legacy CSS behalten wir NUR für Plugins (DataTables, TagsInput) --}}
+    {{-- Legacy CSS nur solange nötig --}}
     <link href="{{ asset('backoffice/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
     <link href="{{ asset('backoffice/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('backoffice/assets/css/icons.css') }}" rel="stylesheet">
     <link href="{{ asset('backoffice/custom/css/toastr.css') }}" rel="stylesheet">
 
-    {{-- Das alte Bootstrap-CSS werfen wir raus, sobald das Layout steht --}}
-    {{-- <link href="{{ asset('backoffice/assets/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
     <title>@yield('title')</title>
 </head>
 
-<body class="bg-trium-bg text-trium-text font-sans antialiased">
+<body class="bg-trium-bg font-sans antialiased text-trium-text">
+    <div
+        x-data="{ sidebarOpen: false }"
+        @keydown.escape.window="sidebarOpen = false"
+        class="flex min-h-screen">
+        {{-- Mobile Overlay --}}
+        <div
+            x-show="sidebarOpen"
+            x-cloak
+            x-transition.opacity
+            @click="sidebarOpen = false"
+            class="fixed inset-0 z-40 bg-black/50 backdrop-blur-[1px] lg:hidden"></div>
 
-    {{-- Wrapper mit Tailwind Flexbox --}}
-    <div class="flex min-h-screen">
-
-        <aside class="fixed inset-y-0 left-0 z-50 w-64 bg-trium-bg2 border-r border-trium-border transition-transform lg:translate-x-0 lg:static lg:inset-0">
+        {{-- Sidebar --}}
+        <aside
+            class="fixed inset-y-0 left-0 z-50 w-64 border-r border-trium-border bg-trium-bg2 transition-transform duration-300 ease-in-out lg:static lg:inset-auto lg:z-auto lg:translate-x-0"
+            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
             @include('backoffice._body.sidebar')
         </aside>
 
-        <div class="flex-1 flex flex-col min-w-0">
+        {{-- Main area --}}
+        <div class="flex min-h-screen min-w-0 flex-1 flex-col">
+            @include('backoffice._body.header')
 
-            <header class="h-16 bg-trium-panel border-b border-trium-border sticky top-0 z-40 shadow-trium-soft">
-                @include('backoffice._body.header')
-            </header>
-
-            <main class="p-6">
+            <main class="flex-1 p-6">
                 @yield('backofficepage')
             </main>
 
             @include('backoffice._body.footer')
         </div>
-
     </div>
 
-    {{-- Scripts --}}
     <script src="{{ asset('backoffice/assets/js/jquery.min.js') }}"></script>
-    {{-- Behalte Plugins nur solange du sie brauchst --}}
     <script src="{{ asset('backoffice/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 

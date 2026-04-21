@@ -1,4 +1,4 @@
-<footer class="h-12 flex items-center justify-center bg-trium-bg border-t border-trium-border">
+<footer class="mt-auto h-12 flex items-center justify-center border-t border-trium-border bg-trium-bg">
     <p class="text-xs text-trium-sub tracking-wide">
         Copyright © {{ date('Y') }}. <span class="text-trium-400 font-medium">Just No</span>. All rights reserved.
     </p>
