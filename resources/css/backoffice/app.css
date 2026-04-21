@@ -5,3 +5,181 @@
 [x-cloak] {
     display: none !important;
 }
+
+@layer components {
+    .jn-page-title {
+        @apply text-2xl font-bold tracking-tight text-trium-text;
+    }
+
+    .jn-section-title {
+        @apply text-lg font-semibold text-trium-text;
+    }
+
+    .jn-card {
+        @apply rounded-xl border border-trium-border bg-trium-panel shadow-trium-soft;
+    }
+
+    .jn-card-body {
+        @apply p-4 md:p-6;
+    }
+
+    .jn-card-header {
+        @apply flex items-center justify-between border-b border-trium-border px-4 py-4 md:px-6;
+    }
+
+    .jn-card-title {
+        @apply text-lg font-semibold text-trium-text;
+    }
+
+    .jn-btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50;
+    }
+
+    .jn-btn-primary {
+        @apply jn-btn bg-trium-400 text-slate-950 hover:bg-trium-300 focus:ring-trium-400;
+    }
+
+    .jn-btn-secondary {
+        @apply jn-btn border border-trium-border bg-trium-bg2 text-trium-text hover:border-trium-400 hover:text-trium-400 focus:ring-trium-400;
+    }
+
+    .jn-btn-danger {
+        @apply jn-btn bg-red-500/15 text-red-400 hover:bg-red-500/25 focus:ring-red-500;
+    }
+
+    .jn-btn-ghost {
+        @apply jn-btn text-trium-sub hover:bg-trium-bg2 hover:text-trium-400 focus:ring-trium-400;
+    }
+
+    .jn-label {
+        @apply mb-2 block text-sm font-medium text-trium-text;
+    }
+
+    .jn-input {
+        @apply block w-full rounded-lg border border-trium-border bg-trium-bg2 px-3 py-2 text-sm text-trium-text placeholder:text-trium-sub/70 focus:border-trium-400 focus:outline-none focus:ring-2 focus:ring-trium-400/30;
+    }
+
+    .jn-select {
+        @apply block w-full rounded-lg border border-trium-border bg-trium-bg2 px-3 py-2 text-sm text-trium-text focus:border-trium-400 focus:outline-none focus:ring-2 focus:ring-trium-400/30;
+    }
+
+    .jn-textarea {
+        @apply block min-h-[8rem] w-full rounded-lg border border-trium-border bg-trium-bg2 px-3 py-2 text-sm text-trium-text placeholder:text-trium-sub/70 focus:border-trium-400 focus:outline-none focus:ring-2 focus:ring-trium-400/30;
+    }
+
+    .jn-help {
+        @apply mt-1 text-xs text-trium-sub;
+    }
+
+    .jn-badge {
+        @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium;
+    }
+
+    .jn-badge-success {
+        @apply jn-badge border-trium-400/20 bg-trium-400/10 text-trium-400;
+    }
+
+    .jn-badge-danger {
+        @apply jn-badge border-red-500/20 bg-red-500/10 text-red-400;
+    }
+
+    .jn-badge-warning {
+        @apply jn-badge border-orange-500/20 bg-orange-500/10 text-orange-400;
+    }
+
+    .jn-table-wrap {
+        @apply overflow-x-auto;
+    }
+
+    .jn-table {
+        @apply w-full border-collapse text-left;
+    }
+
+    .jn-table thead {
+        @apply bg-trium-bg2/50 text-xs uppercase tracking-widest text-trium-sub;
+    }
+
+    .jn-table th {
+        @apply px-4 py-3 font-medium md:px-6;
+    }
+
+    .jn-table td {
+        @apply px-4 py-3 text-trium-text md:px-6;
+    }
+
+    .jn-table tbody {
+        @apply divide-y divide-trium-border;
+    }
+
+    .jn-table tbody tr {
+        @apply transition-colors hover:bg-trium-bg2/30;
+    }
+
+    .jn-stat-card {
+        @apply rounded-xl border-l-4 bg-trium-panel p-4 shadow-trium-soft;
+    }
+
+    .jn-stat-label {
+        @apply mb-1 text-sm uppercase tracking-wider text-trium-sub;
+    }
+
+    .jn-stat-value {
+        @apply text-2xl font-bold;
+    }
+
+    .jn-icon-circle {
+        @apply ml-auto flex h-12 w-12 items-center justify-center rounded-full;
+    }
+
+    .jn-stat-row {
+        @apply flex items-center;
+    }
+
+    .jn-sidebar-section-label {
+        @apply px-3 pb-2 pt-6 text-[10px] font-bold uppercase tracking-[0.15em] text-trium-sub/60;
+    }
+
+    .jn-sidebar-link {
+        @apply flex items-center rounded-lg px-3 py-2.5 text-trium-text transition-all duration-200 hover:bg-trium-bg/50 hover:text-trium-400;
+    }
+
+    .jn-sidebar-link-active {
+        @apply bg-trium-400/10 text-trium-400 shadow-trium-soft;
+    }
+
+    .jn-sidebar-link-muted {
+        @apply flex items-center rounded-lg px-3 py-2.5 text-trium-sub transition-all duration-200 hover:bg-trium-bg/50 hover:text-trium-400;
+    }
+
+    .jn-sidebar-icon {
+        @apply text-xl;
+    }
+
+    .jn-sidebar-text {
+        @apply ml-3 font-medium;
+    }
+
+    .jn-sidebar-submenu {
+        @apply mt-1 space-y-1 pl-10;
+    }
+
+    .jn-sidebar-sublink {
+        @apply block rounded-md px-3 py-2 text-sm text-trium-sub transition-colors hover:bg-trium-bg/50 hover:text-trium-400;
+    }
+
+    .jn-sidebar-sublink-active {
+        @apply bg-trium-400/10 font-medium text-trium-400;
+    }
+
+    .jn-sidebar-panel {
+        @apply flex h-full w-64 flex-col border-r border-trium-border bg-trium-bg2 shadow-xl;
+    }
+
+    .jn-sidebar-head {
+        @apply flex h-16 items-center border-b border-trium-border bg-trium-panel px-5;
+    }
+
+    .jn-sidebar-body {
+        @apply flex-1 overflow-y-auto px-3 py-4;
+    }
+}
