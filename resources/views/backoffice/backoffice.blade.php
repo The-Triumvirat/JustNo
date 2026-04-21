@@ -1,114 +1,64 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--favicon-->
-  <link rel="icon" href="{{ asset('backoffice/assets/images/favicon-32x32.png') }}" type="image/png" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!--favicon-->
+    <link rel="icon" href="{{ asset('brand/tt-lion.png') }}" type="image/png" />
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-  @vite(['resources/css/backoffice/app.css', 'resources/js/app.js'])
-  <!-- legacy bootstrap -->
+    @vite(['resources/css/backoffice/app.css', 'resources/js/app.js'])
 
-  <!--tagsinput-->
-  <link href="{{ asset('backoffice/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
-  <!--tagsinput-->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.min.js"></script>
+    <!-- legacy bootstrap -->
 
-  <!--plugins-->
-  <link href="{{ asset('backoffice/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
-  <link href="{{ asset('backoffice/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
-  <link href="{{ asset('backoffice/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
-  <link href="{{ asset('backoffice/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
-  <!-- loader
-  <link href="{{ asset('backoffice/assets/css/pace.min.css') }}" rel="stylesheet" />
-  <script src="{{ asset('backoffice/assets/js/pace.min.js') }}"></script>-->
-  <!-- Bootstrap CSS -->
-  <link href="{{ asset('backoffice/assets/css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('backoffice/assets/css/bootstrap-extended.css') }}" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <link href="{{ asset('backoffice/assets/css/app.css') }}" rel="stylesheet">
-  <link href="{{ asset('backoffice/assets/css/icons.css') }}" rel="stylesheet">
-  <!-- Theme Style CSS -->
-  <link rel="stylesheet" href="{{ asset('backoffice/assets/css/dark-theme.css') }}" />
-  <link rel="stylesheet" href="{{ asset('backoffice/assets/css/semi-dark.css') }}" />
-  <link rel="stylesheet" href="{{ asset('backoffice/assets/css/header-colors.css') }}" />
-  <!-- Datatable -->
-  <link href="{{ asset('backoffice/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
-  <!-- End Datatable -->
+    {{-- Legacy CSS behalten wir NUR für Plugins (DataTables, TagsInput) --}}
+    <link href="{{ asset('backoffice/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
+    <link href="{{ asset('backoffice/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('backoffice/assets/css/icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('backoffice/custom/css/toastr.css') }}" rel="stylesheet">
 
-  <link href="{{ asset('backoffice/custom/css/toastr.css') }}" rel="stylesheet">
-  <title>@yield('title')</title>
+    {{-- Das alte Bootstrap-CSS werfen wir raus, sobald das Layout steht --}}
+    {{-- <link href="{{ asset('backoffice/assets/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
+    <title>@yield('title')</title>
 </head>
 
-<body>
-  <!--wrapper-->
-  <div class="wrapper">
-    <!--sidebar wrapper -->
-    @include('backoffice._body.sidebar')
-    <!--end sidebar wrapper -->
-    <!--start header -->
-    @include('backoffice._body.header')
-    <!--end header -->
-    <!--start page wrapper -->
-    <div class="page-wrapper">
-      @yield('backofficepage')
+<body class="bg-trium-bg text-trium-text font-sans antialiased">
+
+    {{-- Wrapper mit Tailwind Flexbox --}}
+    <div class="flex min-h-screen">
+
+        <aside class="fixed inset-y-0 left-0 z-50 w-64 bg-trium-bg2 border-r border-trium-border transition-transform lg:translate-x-0 lg:static lg:inset-0">
+            @include('backoffice._body.sidebar')
+        </aside>
+
+        <div class="flex-1 flex flex-col min-w-0">
+
+            <header class="h-16 bg-trium-panel border-b border-trium-border sticky top-0 z-40 shadow-trium-soft">
+                @include('backoffice._body.header')
+            </header>
+
+            <main class="p-6">
+                @yield('backofficepage')
+            </main>
+
+            @include('backoffice._body.footer')
+        </div>
+
     </div>
-    <!--end page wrapper -->
-    <!--start overlay-->
-    <div class="overlay toggle-icon"></div>
-    <!--end overlay-->
-    <!--Start Back To Top Button-->
-    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
-    <!--End Back To Top Button-->
-    @include('backoffice._body.footer')
-  </div>
-  <!--end wrapper-->
 
+    {{-- Scripts --}}
+    <script src="{{ asset('backoffice/assets/js/jquery.min.js') }}"></script>
+    {{-- Behalte Plugins nur solange du sie brauchst --}}
+    <script src="{{ asset('backoffice/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-  <!--end switcher-->
-  <!-- Bootstrap JS -->
-  <script src="{{ asset('backoffice/assets/js/bootstrap.bundle.min.js') }}"></script>
-  <!--plugins-->
-  <script src="{{ asset('backoffice/assets/js/jquery.min.js') }}"></script>
-  <script src="{{ asset('backoffice/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
-  <script src="{{ asset('backoffice/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
-  <script src="{{ asset('backoffice/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-  <script src="{{ asset('backoffice/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
-  <script src="{{ asset('backoffice/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-  <script src="{{ asset('backoffice/assets/plugins/chartjs/js/chart.js') }}"></script>
-  <script src="{{ asset('backoffice/assets/js/index.js') }}"></script>
-  <!--tagsinput-->
-  <script src="{{ asset('backoffice/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
-  <!--tagsinput-->
-
-  <!--app JS-->
-  <script src="{{ asset('backoffice/assets/js/app.js') }}"></script>
-  <script src="{{ asset('backoffice/assets/js/validate.min.js') }}"></script>
-  <!--sweetalert2 JS-->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <script src="{{ asset('backoffice/assets/js/code.js') }}"></script>
-
-  <!--<script>
-    new PerfectScrollbar(".app-container")
-  </script>-->
-
-  <!--Datatable-->
-  <script src="{{ asset('backoffice/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('backoffice/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
-  <script>
-    $(document).ready(function() {
-      $('#example').DataTable();
-    });
-  </script>
-  <!--End Datatable-->
-
-  @include('shared.message')
-
-  
+    @include('shared.message')
 </body>
 
 </html>
