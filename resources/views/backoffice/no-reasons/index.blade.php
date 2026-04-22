@@ -3,41 +3,45 @@ All Just No Reasons
 @endsection
 
 @extends('backoffice.backoffice')
-@section('backofficepage')
 
-<div class="page-content">
-  <!--breadcrumb-->
-  <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="ps-3">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0 p-0">
-          <li class="breadcrumb-item"><a href="{{ route('backoffice.dashboard') }}"><i class="bx bx-home-alt"></i></a>
+@section('backofficepage')
+<div class="space-y-6">
+
+  <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+    <div>
+      <h1 class="jn-page-title">All Just No Reasons</h1>
+      <nav aria-label="breadcrumb" class="mt-2">
+        <ol class="flex items-center gap-2 text-sm text-trium-sub">
+          <li>
+            <a href="{{ route('backoffice.dashboard') }}" class="transition-colors hover:text-trium-400">
+              <i class="bx bx-home-alt"></i>
+            </a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">All Just No Reasons</li>
+          <li class="text-trium-sub/50">/</li>
+          <li class="text-trium-sub">All Just No Reasons</li>
         </ol>
       </nav>
     </div>
-    <div class="ms-auto">
-      <div class="btn-group">
-        <a href="{{ route('backoffice.no-reasons.export') }}" class="btn btn-danger px-5">Export </a>
-      </div>
 
-      <div class="btn-group">
-        <a href="{{ route('backoffice.no-reasons.import.no.reasons') }}" class="btn btn-warning px-5">Import </a>
-      </div>
+    <div class="flex flex-wrap gap-3">
+      <a href="{{ route('backoffice.no-reasons.export') }}" class="jn-btn-danger">
+        Export
+      </a>
 
-      <div class="btn-group">
-        <a href="{{ route('backoffice.no-reasons.create') }}" class="btn btn-primary px-5">Add Just No Reasons </a>
-      </div>
+      <a href="{{ route('backoffice.no-reasons.import.no.reasons') }}" class="jn-btn-secondary">
+        Import
+      </a>
+
+      <a href="{{ route('backoffice.no-reasons.create') }}" class="jn-btn-primary">
+        Add Just No Reason
+      </a>
     </div>
-    
   </div>
-  <!--end breadcrumb-->
 
-  <div class="card">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
+  <div class="jn-card">
+    <div class="jn-card-body">
+      <div class="jn-table-wrap">
+        <table id="example" class="jn-table">
           <thead>
             <tr>
               <th>Sl</th>
@@ -46,23 +50,36 @@ All Just No Reasons
             </tr>
           </thead>
           <tbody>
-            @foreach ($noReasons as $key=> $item)
+            @forelse ($noReasons as $key => $item)
             <tr>
-              <td>{{ $key+1 }}</td>
+              <td>{{ $key + 1 }}</td>
               <td>{{ $item->reason }}</td>
               <td>
-                <a href="{{ route('backoffice.no-reasons.edit',$item->id) }}" class="btn btn-info px-5">Edit </a>
-                <a href="{{ route('backoffice.no-reasons.destroy',$item->id) }}" class="btn btn-danger px-5" id="delete">Delete </a>
+                <div class="flex flex-wrap gap-2">
+                  <a href="{{ route('backoffice.no-reasons.edit', $item->id) }}"
+                    class="jn-btn-secondary">
+                    Edit
+                  </a>
+
+                  <a href="{{ route('backoffice.no-reasons.destroy', $item->id) }}"
+                    class="jn-btn-danger"
+                    id="delete">
+                    Delete
+                  </a>
+                </div>
               </td>
             </tr>
-            @endforeach
-
+            @empty
+            <tr>
+              <td colspan="3" class="px-6 py-10 text-center italic text-trium-sub">
+                No reasons found.
+              </td>
+            </tr>
+            @endforelse
           </tbody>
-
         </table>
       </div>
     </div>
   </div>
 </div>
-
 @endsection

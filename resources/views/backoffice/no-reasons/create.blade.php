@@ -3,76 +3,98 @@ Add Just No Reasons
 @endsection
 
 @extends('backoffice.backoffice')
+
 @section('backofficepage')
 <script src="{{ asset('backoffice/custom/js/jquery364.min.js') }}"></script>
 
-<div class="page-content">
-  <!--breadcrumb-->
-  <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="ps-3">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0 p-0">
-          <li class="breadcrumb-item"><a href="{{ route('backoffice.dashboard') }}"><i class="bx bx-home-alt"></i></a></li>
-          <li class="breadcrumb-item"><a href="{{ route('backoffice.no-reasons.index') }}">All Just No Reasons</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Add Just No Reasons</li>
-        </ol>
-      </nav>
-    </div>
+<div class="space-y-6">
 
+  <div>
+    <h1 class="jn-page-title">Add Just No Reasons</h1>
+    <nav aria-label="breadcrumb" class="mt-2">
+      <ol class="flex items-center gap-2 text-sm text-trium-sub">
+        <li>
+          <a href="{{ route('backoffice.dashboard') }}" class="transition-colors hover:text-trium-400">
+            <i class="bx bx-home-alt"></i>
+          </a>
+        </li>
+        <li class="text-trium-sub/50">/</li>
+        <li>
+          <a href="{{ route('backoffice.no-reasons.index') }}" class="transition-colors hover:text-trium-400">
+            All Just No Reasons
+          </a>
+        </li>
+        <li class="text-trium-sub/50">/</li>
+        <li class="text-trium-sub">Add Just No Reasons</li>
+      </ol>
+    </nav>
   </div>
-  <!--end breadcrumb-->
 
-  <div class="card">
-    <div class="card-body p-4">
-      <h5 class="mb-4">Add Just No Reasons</h5>
-      <form id="myForm" action="{{ route('backoffice.no-reasons.store') }}" method="post" class="row g-3" enctype="multipart/form-data">
+  <div class="jn-card">
+    <div class="jn-card-body">
+      <h2 class="jn-section-title mb-6">Add Just No Reasons</h2>
+
+      <form
+        id="myForm"
+        action="{{ route('backoffice.no-reasons.store') }}"
+        method="post"
+        class="space-y-6"
+        enctype="multipart/form-data">
         @csrf
 
-        <div class="form-group col-md-6">
-          <label for="input1" class="form-label">Just No Reason</label>
-          <input type="text" name="reason" class="form-control" id="reason" >
+        <div class="max-w-2xl">
+          <label for="reason" class="jn-label">Just No Reason</label>
+          <input
+            type="text"
+            name="reason"
+            id="reason"
+            value="{{ old('reason') }}"
+            class="jn-input @error('reason') border-red-500 focus:border-red-500 focus:ring-red-500/30 @enderror">
+
+          @error('reason')
+          <span class="mt-2 block text-sm text-red-400">{{ $message }}</span>
+          @enderror
         </div>
 
-        <div class="col-md-12">
-          <div class="d-md-flex d-grid align-items-center gap-3">
-            <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+        <div class="flex flex-wrap items-center gap-3">
+          <button type="submit" class="jn-btn-primary">
+            Save Changes
+          </button>
 
-          </div>
+          <a href="{{ route('backoffice.no-reasons.index') }}" class="jn-btn-secondary">
+            Cancel
+          </a>
         </div>
       </form>
     </div>
   </div>
 </div>
 
-<script type="text/javascript">
+<script>
   $(document).ready(function() {
     $('#myForm').validate({
       rules: {
         reason: {
           required: true,
         },
-
       },
       messages: {
         reason: {
           required: 'Please Enter Just No Reason',
         },
-
       },
       errorElement: 'span',
       errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
+        error.addClass('mt-2 block text-sm text-red-400');
+        element.closest('div').append(error);
       },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
+      highlight: function(element) {
+        $(element).addClass('border-red-500 focus:border-red-500 focus:ring-red-500/30');
       },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
+      unhighlight: function(element) {
+        $(element).removeClass('border-red-500 focus:border-red-500 focus:ring-red-500/30');
       },
     });
   });
 </script>
-
-
 @endsection
