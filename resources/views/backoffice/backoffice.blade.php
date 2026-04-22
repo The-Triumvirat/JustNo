@@ -15,10 +15,7 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    {{-- Legacy CSS nur solange nötig --}}
-    <link href="{{ asset('backoffice/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
-    <link href="{{ asset('backoffice/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('backoffice/assets/css/icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('backoffice/custom/css/icons.css') }}" rel="stylesheet">
     <link href="{{ asset('backoffice/custom/css/toastr.css') }}" rel="stylesheet">
 
     <title>@yield('title')</title>
@@ -56,8 +53,7 @@
         </div>
     </div>
 
-    <script src="{{ asset('backoffice/assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('backoffice/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backoffice/custom/js/jquery371.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     @include('shared.message')
