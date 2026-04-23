@@ -36,13 +36,13 @@
 
         {{-- Sidebar --}}
         <aside
-            class="fixed inset-y-0 left-0 z-50 w-64 border-r border-trium-border bg-trium-bg2 transition-transform duration-300 ease-in-out lg:static lg:inset-auto lg:z-auto lg:translate-x-0"
+            class="fixed inset-y-0 left-0 z-50 w-64 border-r border-trium-border bg-trium-bg2 transition-transform duration-300 ease-in-out lg:translate-x-0"
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
             @include('backoffice._body.sidebar')
         </aside>
 
         {{-- Main area --}}
-        <div class="flex min-h-screen min-w-0 flex-1 flex-col">
+        <div class="flex min-h-screen min-w-0 flex-1 flex-col lg:ml-64">
             @include('backoffice._body.header')
 
             <main class="flex-1 p-6">
