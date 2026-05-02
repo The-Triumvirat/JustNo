@@ -54,7 +54,7 @@
     </div>
 
     <script src="{{ asset('backoffice/custom/js/jquery371.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('backoffice/custom/js/sweetalert210.js') }}"></script>
 
     @include('shared.message')
 </body>
