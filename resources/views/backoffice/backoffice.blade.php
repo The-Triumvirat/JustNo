@@ -13,7 +13,7 @@
 
     @vite(['resources/css/backoffice/app.css', 'resources/js/app.js'])
 
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="{{ asset('backoffice/custom/js/alpine.min.js') }}"></script>
 
     <link href="{{ asset('backoffice/custom/css/icons.css') }}" rel="stylesheet">
     <link href="{{ asset('backoffice/custom/css/toastr.css') }}" rel="stylesheet">
