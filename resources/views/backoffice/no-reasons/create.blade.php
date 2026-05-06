@@ -5,7 +5,7 @@ Add Just No Reasons
 @extends('backoffice.backoffice')
 
 @section('backofficepage')
-<script src="{{ asset('backoffice/custom/js/jquery364.min.js') }}"></script>
+<script src="{{ asset('backoffice/custom/js/jquery-400.min.js') }}"></script>
 
 <div class="space-y-6">
 
