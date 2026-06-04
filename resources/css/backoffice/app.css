@@ -1,5 +1,7 @@
 @import "./base/base.css";
 
+@import "./components/buttons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,26 +31,6 @@
 
     .jn-card-title {
         @apply text-lg font-semibold text-trium-text;
-    }
-
-    .jn-btn {
-        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50;
-    }
-
-    .jn-btn-primary {
-        @apply jn-btn bg-trium-400 text-slate-950 hover:bg-trium-300 focus:ring-trium-400;
-    }
-
-    .jn-btn-secondary {
-        @apply jn-btn border border-trium-border bg-trium-bg2 text-trium-text hover:border-trium-400 hover:text-trium-400 focus:ring-trium-400;
-    }
-
-    .jn-btn-danger {
-        @apply jn-btn bg-red-500/15 text-red-400 hover:bg-red-500/25 focus:ring-red-500;
-    }
-
-    .jn-btn-ghost {
-        @apply jn-btn text-trium-sub hover:bg-trium-bg2 hover:text-trium-400 focus:ring-trium-400;
     }
 
     .jn-label {
