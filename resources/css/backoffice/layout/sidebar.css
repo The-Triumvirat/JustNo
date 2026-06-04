@@ -1,0 +1,49 @@
+@layer components {
+    .jn-sidebar-section-label {
+        @apply px-3 pb-2 pt-6 text-[10px] font-bold uppercase tracking-[0.15em] text-trium-sub/60;
+    }
+
+    .jn-sidebar-link {
+        @apply flex items-center rounded-lg px-3 py-2.5 text-trium-text transition-all duration-200 hover:bg-trium-bg/50 hover:text-trium-400;
+    }
+
+    .jn-sidebar-link-active {
+        @apply bg-trium-400/10 text-trium-400 shadow-trium-soft;
+    }
+
+    .jn-sidebar-link-muted {
+        @apply flex items-center rounded-lg px-3 py-2.5 text-trium-sub transition-all duration-200 hover:bg-trium-bg/50 hover:text-trium-400;
+    }
+
+    .jn-sidebar-icon {
+        @apply text-xl;
+    }
+
+    .jn-sidebar-text {
+        @apply ml-3 font-medium;
+    }
+
+    .jn-sidebar-submenu {
+        @apply mt-1 space-y-1 pl-10;
+    }
+
+    .jn-sidebar-sublink {
+        @apply block rounded-md px-3 py-2 text-sm text-trium-sub transition-colors hover:bg-trium-bg/50 hover:text-trium-400;
+    }
+
+    .jn-sidebar-sublink-active {
+        @apply bg-trium-400/10 font-medium text-trium-400;
+    }
+
+    .jn-sidebar-panel {
+        @apply flex h-full w-64 flex-col border-r border-trium-border bg-trium-bg2 shadow-xl;
+    }
+
+    .jn-sidebar-head {
+        @apply flex h-16 items-center border-b border-trium-border bg-trium-panel px-5;
+    }
+
+    .jn-sidebar-body {
+        @apply flex-1 overflow-y-auto px-3 py-4;
+    }
+}
