@@ -1,10 +1,10 @@
+@import "./base/base.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-[x-cloak] {
-    display: none !important;
-}
+
 
 @layer components {
     .jn-page-title {
