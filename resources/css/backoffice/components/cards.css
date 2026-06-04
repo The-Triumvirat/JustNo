@@ -1,0 +1,17 @@
+@layer components {
+    .jn-card {
+        @apply rounded-xl border border-trium-border bg-trium-panel shadow-trium-soft;
+    }
+
+    .jn-card-body {
+        @apply p-4 md:p-6;
+    }
+
+    .jn-card-header {
+        @apply flex items-center justify-between border-b border-trium-border px-4 py-4 md:px-6;
+    }
+
+    .jn-card-title {
+        @apply text-lg font-semibold text-trium-text;
+    }
+}
