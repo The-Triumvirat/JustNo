@@ -1,0 +1,30 @@
+@layer components {
+
+    .jn-table-wrap {
+        @apply overflow-x-auto;
+    }
+
+    .jn-table {
+        @apply w-full border-collapse text-left;
+    }
+
+    .jn-table thead {
+        @apply bg-trium-bg2/50 text-xs uppercase tracking-widest text-trium-sub;
+    }
+
+    .jn-table th {
+        @apply px-4 py-3 font-medium md:px-6;
+    }
+
+    .jn-table td {
+        @apply px-4 py-3 text-trium-text md:px-6;
+    }
+
+    .jn-table tbody {
+        @apply divide-y divide-trium-border;
+    }
+
+    .jn-table tbody tr {
+        @apply transition-colors hover:bg-trium-bg2/30;
+    }
+}

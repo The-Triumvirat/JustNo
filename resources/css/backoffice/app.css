@@ -1,6 +1,7 @@
 @import "./base/base.css";
 
 @import "./components/buttons.css";
+@import "./components/tables.css";
 
 @tailwind base;
 @tailwind components;
@@ -69,33 +70,7 @@
         @apply jn-badge border-orange-500/20 bg-orange-500/10 text-orange-400;
     }
 
-    .jn-table-wrap {
-        @apply overflow-x-auto;
-    }
-
-    .jn-table {
-        @apply w-full border-collapse text-left;
-    }
-
-    .jn-table thead {
-        @apply bg-trium-bg2/50 text-xs uppercase tracking-widest text-trium-sub;
-    }
-
-    .jn-table th {
-        @apply px-4 py-3 font-medium md:px-6;
-    }
-
-    .jn-table td {
-        @apply px-4 py-3 text-trium-text md:px-6;
-    }
-
-    .jn-table tbody {
-        @apply divide-y divide-trium-border;
-    }
-
-    .jn-table tbody tr {
-        @apply transition-colors hover:bg-trium-bg2/30;
-    }
+    
 
     .jn-stat-card {
         @apply rounded-xl border-l-4 bg-trium-panel p-4 shadow-trium-soft;
