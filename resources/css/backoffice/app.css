@@ -3,6 +3,7 @@
 @import "./components/badges.css";
 @import "./components/buttons.css";
 @import "./components/cards.css";
+@import "./components/forms.css";
 @import "./components/tables.css";
 
 @import "./layout/sidebar.css";
@@ -21,26 +22,6 @@
 
     .jn-section-title {
         @apply text-lg font-semibold text-trium-text;
-    }
-
-    .jn-label {
-        @apply mb-2 block text-sm font-medium text-trium-text;
-    }
-
-    .jn-input {
-        @apply block w-full rounded-lg border border-trium-border bg-trium-bg2 px-3 py-2 text-sm text-trium-text placeholder:text-trium-sub/70 focus:border-trium-400 focus:outline-none focus:ring-2 focus:ring-trium-400/30;
-    }
-
-    .jn-select {
-        @apply block w-full rounded-lg border border-trium-border bg-trium-bg2 px-3 py-2 text-sm text-trium-text focus:border-trium-400 focus:outline-none focus:ring-2 focus:ring-trium-400/30;
-    }
-
-    .jn-textarea {
-        @apply block min-h-[8rem] w-full rounded-lg border border-trium-border bg-trium-bg2 px-3 py-2 text-sm text-trium-text placeholder:text-trium-sub/70 focus:border-trium-400 focus:outline-none focus:ring-2 focus:ring-trium-400/30;
-    }
-
-    .jn-help {
-        @apply mt-1 text-xs text-trium-sub;
     }
 
     .jn-stat-card {
