@@ -1,0 +1,21 @@
+@layer components {
+    .jn-stat-card {
+        @apply rounded-xl border-l-4 bg-trium-panel p-4 shadow-trium-soft;
+    }
+
+    .jn-stat-label {
+        @apply mb-1 text-sm uppercase tracking-wider text-trium-sub;
+    }
+
+    .jn-stat-value {
+        @apply text-2xl font-bold;
+    }
+
+    .jn-icon-circle {
+        @apply ml-auto flex h-12 w-12 items-center justify-center rounded-full;
+    }
+
+    .jn-stat-row {
+        @apply flex items-center;
+    }
+}
