@@ -5,8 +5,6 @@ Edit Just No Reasons
 @extends('backoffice.backoffice')
 
 @section('backofficepage')
-<script src="{{ asset('backoffice/custom/js/jquery-400.min.js') }}"></script>
-
 <div class="space-y-6">
 
   <div>
@@ -50,6 +48,8 @@ Edit Just No Reasons
             name="reason"
             id="reason"
             value="{{ old('reason', $noReason->reason) }}"
+            required
+            maxlength="512"
             class="jn-input @error('reason') border-red-500 focus:border-red-500 focus:ring-red-500/30 @enderror">
 
           @error('reason')
@@ -70,32 +70,4 @@ Edit Just No Reasons
     </div>
   </div>
 </div>
-
-<script>
-  $(document).ready(function() {
-    $('#myForm').validate({
-      rules: {
-        reason: {
-          required: true,
-        },
-      },
-      messages: {
-        reason: {
-          required: 'Please Enter Just No Reason',
-        },
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('mt-2 block text-sm text-red-400');
-        element.closest('div').append(error);
-      },
-      highlight: function(element) {
-        $(element).addClass('border-red-500 focus:border-red-500 focus:ring-red-500/30');
-      },
-      unhighlight: function(element) {
-        $(element).removeClass('border-red-500 focus:border-red-500 focus:ring-red-500/30');
-      },
-    });
-  });
-</script>
 @endsection

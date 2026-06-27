@@ -54,8 +54,6 @@
         </div>
     </div>
 
-    <script src="{{ asset('backoffice/custom/js/jquery-400.min.js') }}"></script>
-    <script src="{{ asset('backoffice/custom/js/sweetalert210.js') }}"></script>
 </body>
 
 </html>
