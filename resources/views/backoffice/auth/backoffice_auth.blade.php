@@ -6,21 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="{{ asset('brand/tt-lion.png') }}" type="image/png" />
-    <link href="{{ asset('backoffice/custom/css/toastr.css') }}" rel="stylesheet">
 
     @vite(['resources/css/backoffice/auth.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-auth-gradient text-trium-text min-h-screen flex items-center justify-center">
+    <x-notifications />
 
     
     <div class="flex w-full justify-center max-w-lg p-6">
         @yield('backofficeAuthPage')
     </div>
-
-    <script src="{{ asset('backoffice/custom/js/jquery-400.min.js') }}"></script>
-
-    @include('shared.message')
 
 </body>
 </html>

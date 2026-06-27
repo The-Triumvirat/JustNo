@@ -16,12 +16,13 @@
     <script src="{{ asset('backoffice/custom/js/alpine.min.js') }}"></script>
 
     <link href="{{ asset('backoffice/custom/css/icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('backoffice/custom/css/toastr.css') }}" rel="stylesheet">
 
     <title>@yield('title')</title>
 </head>
 
 <body class="bg-trium-bg font-sans antialiased text-trium-text">
+    <x-notifications />
+
     <div
         x-data="{ sidebarOpen: false }"
         @keydown.escape.window="sidebarOpen = false"
@@ -55,8 +56,6 @@
 
     <script src="{{ asset('backoffice/custom/js/jquery-400.min.js') }}"></script>
     <script src="{{ asset('backoffice/custom/js/sweetalert210.js') }}"></script>
-
-    @include('shared.message')
 </body>
 
 </html>
