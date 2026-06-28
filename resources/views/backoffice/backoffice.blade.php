@@ -13,8 +13,6 @@
 
     @vite(['resources/css/backoffice/app.css', 'resources/js/app.js'])
 
-    <script src="{{ asset('backoffice/custom/js/alpine.min.js') }}"></script>
-
     <link href="{{ asset('backoffice/custom/css/icons.css') }}" rel="stylesheet">
 
     <title>@yield('title')</title>
