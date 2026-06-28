@@ -21,7 +21,7 @@
 </head>
 
 <body class="bg-trium-bg font-sans antialiased text-trium-text">
-    <x-notifications />
+    <x-notifications :sidebar-offset="true" />
 
     <div
         x-data="{ sidebarOpen: false }"

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="{{ asset('brand/tt-lion.png') }}" type="image/png" />
+    <link href="{{ asset('backoffice/custom/css/icons.css') }}" rel="stylesheet">
 
     @vite(['resources/css/backoffice/auth.css', 'resources/js/app.js'])
 </head>

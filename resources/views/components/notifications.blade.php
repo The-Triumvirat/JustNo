@@ -1,3 +1,5 @@
+@props(['sidebarOffset' => false])
+
 @php
     $notifications = session('notifications', []);
 
@@ -36,7 +38,7 @@
 <div
     x-data="{ notifications: [] }"
     x-init="notifications = JSON.parse($refs.notificationsPayload.textContent)"
-    class="pointer-events-none fixed left-1/2 top-3 z-[80] w-[calc(100%-2rem)] -translate-x-1/2 space-y-2 sm:w-96 lg:left-[calc(50%+8rem)]">
+    class="pointer-events-none fixed left-1/2 top-3 z-[80] w-[calc(100%-2rem)] -translate-x-1/2 space-y-2 sm:w-96 {{ $sidebarOffset ? 'lg:left-[calc(50%+8rem)]' : '' }}">
     <script x-ref="notificationsPayload" type="application/json">@json($notifications)</script>
 
     <template x-for="notification in notifications" :key="notification.id">

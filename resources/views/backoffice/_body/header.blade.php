@@ -123,10 +123,14 @@
 
                         <hr class="jn-topbar-divider">
 
-                        <a href="{{ route('backoffice.logout') }}" class="jn-topbar-menu-link-danger">
-                            <i class="bx bx-log-out-circle text-lg"></i>
-                            Logout
-                        </a>
+                        <form action="{{ route('backoffice.logout') }}" method="POST">
+                            @csrf
+
+                            <button type="submit" class="jn-topbar-menu-link-danger w-full">
+                                <i class="bx bx-log-out-circle text-lg"></i>
+                                Logout
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

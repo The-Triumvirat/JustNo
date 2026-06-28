@@ -15,11 +15,8 @@ class BackofficeLogoutController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        $notification = array(
-            'message' => 'Backoffice Logout Successfully',
-            'alert-type' => 'success'
-        ); 
-        
-        return redirect('/backoffice/login')->with($notification);
+        return redirect()
+            ->route('backoffice.login')
+            ->with('success', 'You have been signed out.');
     } // End Method
 }

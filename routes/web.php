@@ -38,7 +38,7 @@ Route::middleware(['auth', 'role:admin'])
     ->prefix('/backoffice')
     ->group(function () {
         Route::get('/dashboard', [BackofficeController::class, 'backofficeDashboard'])->name('backoffice.dashboard');
-        Route::get('/logout', [BackofficeLogoutController::class, 'backofficeLogout'])->name('backoffice.logout');
+        Route::post('/logout', [BackofficeLogoutController::class, 'backofficeLogout'])->name('backoffice.logout');
         // Backoffice User manage profile data
         Route::get('/profile', [BackofficeProfileController::class, 'backofficeProfile'])->name('backoffice.profile');
         Route::post('/profile/store', [BackofficeProfileController::class, 'backofficeProfileStore'])->name('backoffice.profile.store');
