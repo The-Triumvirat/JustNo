@@ -48,6 +48,67 @@ All Just No Reasons
 
   <div class="jn-card">
     <div class="jn-card-body">
+      <form
+        action="{{ route('backoffice.no-reasons.index') }}"
+        method="GET"
+        class="mb-6 grid gap-4 border-b border-trium-border pb-6 md:grid-cols-2 xl:grid-cols-[minmax(16rem,1fr)_14rem_9rem_auto] xl:items-end">
+        <div>
+          <label for="search" class="jn-label">Search</label>
+          <input
+            type="search"
+            name="search"
+            id="search"
+            value="{{ $search }}"
+            placeholder="Search reasons"
+            class="jn-input">
+        </div>
+
+        <div>
+          <label for="sort" class="jn-label">Sort by</label>
+          <select name="sort" id="sort" class="jn-select">
+            <option value="alpha" @selected($sort === 'alpha')>A to Z</option>
+            <option value="alpha_desc" @selected($sort === 'alpha_desc')>Z to A</option>
+            <option value="newest" @selected($sort === 'newest')>Newest first</option>
+            <option value="oldest" @selected($sort === 'oldest')>Oldest first</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="per_page" class="jn-label">Per page</label>
+          <select name="per_page" id="per_page" class="jn-select">
+            @foreach ([25, 50, 100] as $size)
+              <option value="{{ $size }}" @selected($perPage === $size)>{{ $size }}</option>
+            @endforeach
+          </select>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button type="submit" class="jn-btn-primary">
+            <i class="bx bx-search" aria-hidden="true"></i>
+            Apply
+          </button>
+
+          @if ($search !== '' || $sort !== 'oldest' || $perPage !== 25)
+            <a href="{{ route('backoffice.no-reasons.index') }}" class="jn-btn-secondary">
+              <i class="bx bx-reset" aria-hidden="true"></i>
+              Reset
+            </a>
+          @endif
+        </div>
+      </form>
+
+      <div class="mb-4 flex flex-wrap items-center justify-between gap-2 text-sm text-trium-sub">
+        <p>
+          {{ $noReasons->total() }} {{ Str::plural('reason', $noReasons->total()) }} found
+        </p>
+
+        @if ($noReasons->total() > 0)
+          <p>
+            Showing {{ $noReasons->firstItem() }}–{{ $noReasons->lastItem() }}
+          </p>
+        @endif
+      </div>
+
       <div class="jn-table-wrap">
         <table id="example" class="jn-table">
           <thead>
@@ -60,7 +121,7 @@ All Just No Reasons
           <tbody>
             @forelse ($noReasons as $key => $item)
             <tr>
-              <td>{{ $key + 1 }}</td>
+              <td>{{ $noReasons->firstItem() + $key }}</td>
               <td>{{ $item->reason }}</td>
               <td>
                 <div class="flex flex-wrap gap-2">
@@ -95,6 +156,12 @@ All Just No Reasons
           </tbody>
         </table>
       </div>
+
+      @if ($noReasons->hasPages())
+        <div class="mt-6 border-t border-trium-border pt-6">
+          {{ $noReasons->links() }}
+        </div>
+      @endif
     </div>
   </div>
 

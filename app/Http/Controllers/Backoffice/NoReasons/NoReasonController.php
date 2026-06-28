@@ -12,10 +12,37 @@ use Illuminate\View\View;
 class NoReasonController extends Controller
 {
     
-    public function index(): View
+    public function index(Request $request): View
     {
-        $noReasons = NoReason::all();
-        return view('backoffice.no-reasons.index', compact('noReasons'));
+        $search = trim($request->string('search')->toString());
+        $sort = $request->string('sort')->toString();
+        $perPage = $request->integer('per_page');
+
+        $sortOptions = [
+            'alpha' => ['reason', 'asc'],
+            'alpha_desc' => ['reason', 'desc'],
+            'newest' => ['created_at', 'desc'],
+            'oldest' => ['created_at', 'asc'],
+        ];
+
+        if (!array_key_exists($sort, $sortOptions)) {
+            $sort = 'oldest';
+        }
+
+        if (!in_array($perPage, [25, 50, 100], true)) {
+            $perPage = 25;
+        }
+
+        [$sortColumn, $sortDirection] = $sortOptions[$sort];
+
+        $noReasons = NoReason::query()
+            ->when($search !== '', fn ($query) => $query->where('reason', 'like', "%{$search}%"))
+            ->orderBy($sortColumn, $sortDirection)
+            ->orderBy('id')
+            ->paginate($perPage)
+            ->withQueryString();
+
+        return view('backoffice.no-reasons.index', compact('noReasons', 'search', 'sort', 'perPage'));
     }
 
     public function create(): View
