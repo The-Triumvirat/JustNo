@@ -53,7 +53,7 @@ Route::middleware(['auth', 'role:admin'])
             Route::post('/store', [NoReasonController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [NoReasonController::class, 'edit'])->name('edit');
             Route::post('/update/{id}', [NoReasonController::class, 'update'])->name('update');
-            Route::get('/destroy/{id}', [NoReasonController::class, 'destroy'])->name('destroy');
+            Route::delete('/{id}', [NoReasonController::class, 'destroy'])->name('destroy');
             
             Route::get('/export', [NoReasonController::class, 'export'])->name('export');
             Route::get('/import', [NoReasonController::class, 'importNoReasons'])->name('import.no.reasons');
