@@ -48,7 +48,7 @@
         <div class="jn-card-body">
           <h2 class="mb-6 jn-section-title">Change Password</h2>
 
-          <form action="{{ route('backoffice.password.update') }}" method="post" class="space-y-5">
+          <form action="{{ route('backoffice.profile.password.update') }}" method="post" class="space-y-5">
             @csrf
 
             <div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\PasswordController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backoffice\BackofficeController;
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
+    Route::post('/logout', [BackofficeLogoutController::class, 'backofficeLogout'])->name('logout');
 });
 
 // Backoffice Group Middleware 
@@ -44,7 +47,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::post('/profile/store', [BackofficeProfileController::class, 'backofficeProfileStore'])->name('backoffice.profile.store');
         // Backoffice User update password
         Route::get('/change/password', [BackofficeChangePasswordController::class, 'backofficeChangePassword'])->name('backoffice.change.password');
-        Route::post('/password/update', [BackofficeChangePasswordController::class, 'backofficePasswordUpdate'])->name('backoffice.password.update');
+        Route::post('/password/update', [BackofficeChangePasswordController::class, 'backofficePasswordUpdate'])->name('backoffice.profile.password.update');
 
 
         Route::prefix('/no-reasons')->name('backoffice.no-reasons.')->group(function () {

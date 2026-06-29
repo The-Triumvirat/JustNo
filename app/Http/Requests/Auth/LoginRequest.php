@@ -41,9 +41,14 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        $user = User::where('email', $this->login)
-            ->orWhere('name', $this->login)
-            ->orWhere('phone', $this->login)
+        $this->ensureIsNotRateLimited();
+
+        $user = User::where(function ($query) {
+            $query->where('email', $this->login)
+                ->orWhere('name', $this->login)
+                ->orWhere('phone', $this->login);
+        })
+            ->where('is_active', true)
             ->first();
 
         if (!$user || !Hash::check($this->password, $user->password)) {
@@ -74,8 +79,8 @@ class LoginRequest extends FormRequest
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
-        throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            throw ValidationException::withMessages([
+                'login' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -87,6 +92,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->string('login')).'|'.$this->ip());
     }
 }

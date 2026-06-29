@@ -3,38 +3,47 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-test('password can be updated', function () {
-    $user = User::factory()->create();
+test('an admin can render the change password screen', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
 
-    $response = $this
-        ->actingAs($user)
-        ->from('/profile')
-        ->put('/password', [
-            'current_password' => 'password',
-            'password' => 'new-password',
-            'password_confirmation' => 'new-password',
-        ]);
-
-    $response
-        ->assertSessionHasNoErrors()
-        ->assertRedirect('/profile');
-
-    $this->assertTrue(Hash::check('new-password', $user->refresh()->password));
+    $this
+        ->actingAs($admin)
+        ->get(route('backoffice.change.password'))
+        ->assertOk()
+        ->assertSee(route('backoffice.profile.password.update'), false);
 });
 
-test('correct password must be provided to update password', function () {
-    $user = User::factory()->create();
+test('an admin can change their password', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
 
-    $response = $this
-        ->actingAs($user)
-        ->from('/profile')
-        ->put('/password', [
-            'current_password' => 'wrong-password',
-            'password' => 'new-password',
-            'password_confirmation' => 'new-password',
-        ]);
+    $this
+        ->actingAs($admin)
+        ->from(route('backoffice.change.password'))
+        ->post(route('backoffice.profile.password.update'), [
+            'old_password' => 'password',
+            'new_password' => 'new-secure-password',
+            'new_password_confirmation' => 'new-secure-password',
+        ])
+        ->assertSessionHasNoErrors()
+        ->assertSessionHas('success', 'Password changed successfully.')
+        ->assertRedirect(route('backoffice.change.password'));
 
-    $response
-        ->assertSessionHasErrorsIn('updatePassword', 'current_password')
-        ->assertRedirect('/profile');
+    expect(Hash::check('new-secure-password', $admin->refresh()->password))->toBeTrue();
+});
+
+test('the current password is required to change a password', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+
+    $this
+        ->actingAs($admin)
+        ->from(route('backoffice.change.password'))
+        ->post(route('backoffice.profile.password.update'), [
+            'old_password' => 'wrong-password',
+            'new_password' => 'new-secure-password',
+            'new_password_confirmation' => 'new-secure-password',
+        ])
+        ->assertSessionHasErrors('old_password')
+        ->assertRedirect(route('backoffice.change.password'));
+
+    expect(Hash::check('password', $admin->refresh()->password))->toBeTrue();
 });

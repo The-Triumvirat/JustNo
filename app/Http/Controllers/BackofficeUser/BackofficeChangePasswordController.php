@@ -32,11 +32,6 @@ class BackofficeChangePasswordController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
 
-        $notification = array(
-            'message' => 'Password Change Successfully',
-            'alert-type' => 'success'
-        );
-
-        return back()->with($notification);
+        return back()->with('success', 'Password changed successfully.');
     } // End Method
 }

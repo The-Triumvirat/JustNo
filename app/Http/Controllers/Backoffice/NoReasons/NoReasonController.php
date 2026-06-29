@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Backoffice\NoReasons;
 
 use App\Http\Controllers\Controller;
+use App\Models\NoReason;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\NoReason;
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class NoReasonController extends Controller
 {
-    
     public function index(Request $request): View
     {
         $search = trim($request->string('search')->toString());
@@ -53,7 +53,7 @@ class NoReasonController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'reason' => 'required|string|max:512',
+            'reason' => ['required', 'string', 'max:512', 'unique:no_reasons,reason'],
         ]);
 
         NoReason::create([
@@ -66,13 +66,14 @@ class NoReasonController extends Controller
     public function edit($id): View
     {
         $noReason = NoReason::findOrFail($id);
+
         return view('backoffice.no-reasons.edit', compact('noReason'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
-            'reason' => 'required|string|max:512',
+            'reason' => ['required', 'string', 'max:512', Rule::unique('no_reasons', 'reason')->ignore($id)],
         ]);
 
         $noReason = NoReason::findOrFail($id);
@@ -94,7 +95,6 @@ class NoReasonController extends Controller
     public function export(): Response
     {
         $noReasons = NoReason::pluck('reason');
-
         $filename = 'no_reasons_' . now()->format('Y-m-d_H-i-s') . '.json';
 
         return response(
@@ -102,14 +102,11 @@ class NoReasonController extends Controller
             200,
             [
                 'Content-Type' => 'application/json',
-                'Content-Disposition' => "attachment; filename=\"$filename\"",
+                'Content-Disposition' => "attachment; filename=\"{$filename}\"",
             ]
         );
     }
 
-    /**
-     * Import export No Reasons
-     */
     public function importNoReasons(): View
     {
         return view('backoffice.no-reasons.import');
@@ -118,35 +115,40 @@ class NoReasonController extends Controller
     public function importNoReasonsStore(Request $request): RedirectResponse
     {
         $request->validate([
-            'file' => 'required|file|mimes:json'
+            'file' => ['required', 'file', 'mimes:json', 'max:2048'],
         ]);
 
         try {
             $data = json_decode(
                 file_get_contents($request->file('file')->path()),
-                true
+                true,
+                512,
+                JSON_THROW_ON_ERROR
             );
         } catch (\Throwable $e) {
             return back()->with('error', 'JSON konnte nicht gelesen werden.');
         }
 
         if (!is_array($data)) {
-            return back()->with('error', 'Ungültiges JSON Format.');
+            return back()->with('error', 'Ungültiges JSON-Format.');
         }
 
         $imported = 0;
         $skipped = 0;
 
         foreach ($data as $reason) {
-            $reason = trim($reason ?? '');
-
-            // Ignore empty/too short values
-            if ($reason === '' || strlen($reason) < 2) {
+            if (!is_string($reason)) {
                 $skipped++;
                 continue;
             }
 
-            // Automatically performs insert OR detects duplicate via UNIQUE index
+            $reason = trim($reason);
+
+            if (mb_strlen($reason) < 2 || mb_strlen($reason) > 512) {
+                $skipped++;
+                continue;
+            }
+
             $entry = NoReason::firstOrCreate(['reason' => $reason]);
 
             if ($entry->wasRecentlyCreated) {
@@ -156,13 +158,9 @@ class NoReasonController extends Controller
             }
         }
 
-        $notification = [
-            'message' => "Import abgeschlossen — Importiert: $imported | Übersprungen: $skipped",
-            'alert-type' => 'success'
-        ];
-
-        return redirect()->back()->with($notification);
+        return back()->with(
+            'success',
+            "Import abgeschlossen - Importiert: {$imported} | Übersprungen: {$skipped}"
+        );
     }
-
-
 }

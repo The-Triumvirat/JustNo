@@ -39,11 +39,8 @@ class BackofficeLoginController extends Controller
         $adminData = User::find($id);
         $username = $adminData->name;
 
-        $notification = array(
-            'message' => 'User ' . $username . ' Login Successfully',
-            'alert-type' => 'info'
-        );
-
-        return redirect()->intended($url)->with($notification);
+        return redirect()
+            ->intended($url)
+            ->with('info', 'Welcome back, ' . $username . '.');
     }
 }
