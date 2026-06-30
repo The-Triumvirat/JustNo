@@ -125,7 +125,7 @@ All Just No Reasons
               <td>{{ $item->reason }}</td>
               <td>
                 <div class="flex flex-wrap gap-2">
-                  <a href="{{ route('backoffice.no-reasons.edit', $item->id) }}"
+                  <a href="{{ route('backoffice.no-reasons.edit', $item) }}"
                     class="jn-btn-secondary">
                     Edit
                   </a>
@@ -133,7 +133,7 @@ All Just No Reasons
                   <button
                     type="button"
                     class="jn-btn-danger"
-                    data-delete-url="{{ route('backoffice.no-reasons.destroy', $item->id) }}"
+                    data-delete-url="{{ route('backoffice.no-reasons.destroy', $item) }}"
                     data-delete-reason="{{ $item->reason }}"
                     @click="
                       deleteUrl = $event.currentTarget.dataset.deleteUrl;

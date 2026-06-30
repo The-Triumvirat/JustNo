@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\NoReason;
 
@@ -31,21 +29,12 @@ class NoReasonApiController extends Controller
         ]);
     }
 
-    public function show($id): JsonResponse
+    public function show(NoReason $noReason): JsonResponse
     {
-        try {
-            $reason = NoReason::findOrFail($id);
-
-            return response()->json([
-                'id' => $reason->id,
-                'reason' => $reason->reason
-            ]);
-        } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'No Reason not found',
-                'id' => $id
-            ], 404);
-        }
+        return response()->json([
+            'id' => $noReason->id,
+            'reason' => $noReason->reason,
+        ]);
     }
 
     /**

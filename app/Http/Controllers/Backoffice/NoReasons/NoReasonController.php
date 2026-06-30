@@ -60,16 +60,13 @@ class NoReasonController extends Controller
         return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason created successfully.');
     }
 
-    public function edit($id): View
+    public function edit(NoReason $noReason): View
     {
-        $noReason = NoReason::findOrFail($id);
-
         return view('backoffice.no-reasons.edit', compact('noReason'));
     }
 
-    public function update(NoReasonRequest $request, $id): RedirectResponse
+    public function update(NoReasonRequest $request, NoReason $noReason): RedirectResponse
     {
-        $noReason = NoReason::findOrFail($id);
         $noReason->update([
             'reason' => $request->validated('reason'),
         ]);
@@ -77,9 +74,8 @@ class NoReasonController extends Controller
         return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason updated successfully.');
     }
 
-    public function destroy($id): RedirectResponse
+    public function destroy(NoReason $noReason): RedirectResponse
     {
-        $noReason = NoReason::findOrFail($id);
         $noReason->delete();
 
         return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason deleted successfully.');

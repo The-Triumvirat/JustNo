@@ -43,3 +43,16 @@ test('an admin can update a no reason with a patch request', function () {
 
     expect($noReason->refresh()->reason)->toBe('Updated reason');
 });
+
+test('an admin can keep the current reason while editing', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $noReason = NoReason::create(['reason' => 'Unchanged reason']);
+
+    $this
+        ->actingAs($admin)
+        ->patch(route('backoffice.no-reasons.update', $noReason), [
+            'reason' => 'Unchanged reason',
+        ])
+        ->assertSessionHasNoErrors()
+        ->assertRedirect(route('backoffice.no-reasons.index'));
+});

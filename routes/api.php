@@ -14,7 +14,11 @@ Route::prefix('v1')
     ->group(function () {
     Route::get('no', [NoReasonApiController::class, 'index']);
     Route::get('/no/count', [NoReasonApiController::class, 'count']);
-    Route::get('/no/{id}', [NoReasonApiController::class, 'show']);
+    Route::get('/no/{noReason}', [NoReasonApiController::class, 'show'])
+        ->missing(fn (Request $request) => response()->json([
+            'message' => 'No Reason not found',
+            'id' => $request->route('noReason'),
+        ], 404));
 
     Route::get('tea', function () {
         return response()->json([

@@ -54,9 +54,9 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/', [NoReasonController::class, 'index'])->name('index');
             Route::get('/create', [NoReasonController::class, 'create'])->name('create');
             Route::post('/store', [NoReasonController::class, 'store'])->name('store');
-            Route::get('/edit/{id}', [NoReasonController::class, 'edit'])->name('edit');
-            Route::patch('/update/{id}', [NoReasonController::class, 'update'])->name('update');
-            Route::delete('/{id}', [NoReasonController::class, 'destroy'])->name('destroy');
+            Route::get('/edit/{noReason}', [NoReasonController::class, 'edit'])->name('edit');
+            Route::patch('/update/{noReason}', [NoReasonController::class, 'update'])->name('update');
+            Route::delete('/{noReason}', [NoReasonController::class, 'destroy'])->name('destroy');
             
             Route::get('/export', [NoReasonController::class, 'export'])->name('export');
             Route::get('/import', [NoReasonController::class, 'importNoReasons'])->name('import.no.reasons');
