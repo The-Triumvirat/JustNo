@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\BackofficeUser;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backoffice\ChangePasswordRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
@@ -19,17 +19,10 @@ class BackofficeChangePasswordController extends Controller
         return view('backoffice.profile.backoffice_change_password', compact('profileData'));
     } // End Method
 
-    public function backofficePasswordUpdate(Request $request): RedirectResponse
+    public function backofficePasswordUpdate(ChangePasswordRequest $request): RedirectResponse
     {
-        // Validation 
-        $request->validate([
-            'old_password' => ['required', 'current_password'],
-            'new_password' => 'required|confirmed'
-        ]);
-
-        /// Update The New Password 
         User::whereId(auth::user()->id)->update([
-            'password' => Hash::make($request->new_password)
+            'password' => Hash::make($request->validated('new_password'))
         ]);
 
         return back()->with('success', 'Password changed successfully.');

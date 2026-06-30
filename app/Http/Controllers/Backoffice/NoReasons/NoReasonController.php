@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Backoffice\NoReasons;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backoffice\ImportNoReasonsRequest;
+use App\Http\Requests\Backoffice\NoReasonRequest;
 use App\Models\NoReason;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class NoReasonController extends Controller
@@ -50,14 +51,10 @@ class NoReasonController extends Controller
         return view('backoffice.no-reasons.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(NoReasonRequest $request): RedirectResponse
     {
-        $request->validate([
-            'reason' => ['required', 'string', 'max:512', 'unique:no_reasons,reason'],
-        ]);
-
         NoReason::create([
-            'reason' => $request->input('reason'),
+            'reason' => $request->validated('reason'),
         ]);
 
         return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason created successfully.');
@@ -70,15 +67,11 @@ class NoReasonController extends Controller
         return view('backoffice.no-reasons.edit', compact('noReason'));
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(NoReasonRequest $request, $id): RedirectResponse
     {
-        $request->validate([
-            'reason' => ['required', 'string', 'max:512', Rule::unique('no_reasons', 'reason')->ignore($id)],
-        ]);
-
         $noReason = NoReason::findOrFail($id);
         $noReason->update([
-            'reason' => $request->input('reason'),
+            'reason' => $request->validated('reason'),
         ]);
 
         return redirect()->route('backoffice.no-reasons.index')->with('success', 'No Reason updated successfully.');
@@ -112,12 +105,8 @@ class NoReasonController extends Controller
         return view('backoffice.no-reasons.import');
     }
 
-    public function importNoReasonsStore(Request $request): RedirectResponse
+    public function importNoReasonsStore(ImportNoReasonsRequest $request): RedirectResponse
     {
-        $request->validate([
-            'file' => ['required', 'file', 'mimes:json', 'max:2048'],
-        ]);
-
         try {
             $data = json_decode(
                 file_get_contents($request->file('file')->path()),

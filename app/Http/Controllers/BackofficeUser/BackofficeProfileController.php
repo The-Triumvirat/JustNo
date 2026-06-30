@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\BackofficeUser;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backoffice\BackofficeProfileRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class BackofficeProfileController extends Controller
@@ -20,16 +19,10 @@ class BackofficeProfileController extends Controller
         return view('backoffice.profile.backoffice_profile_view', compact('profileData'));
     }
 
-    public function backofficeProfileStore(Request $request): RedirectResponse
+    public function backofficeProfileStore(BackofficeProfileRequest $request): RedirectResponse
     {
         $id = Auth::id();
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($id)],
-            'phone' => ['nullable', 'string', 'max:50'],
-            'address' => ['nullable', 'string', 'max:255'],
-            'photo' => ['nullable', 'image', 'max:2048'],
-        ]);
+        $validated = $request->validated();
 
         $data = User::findOrFail($id);
         $data->name = $validated['name'];
