@@ -73,6 +73,3 @@ Route::post('/backoffice/forget-password', [BackofficeForgetPasswordController::
 
 Route::get('/backoffice/reset-password/{token}', [BackofficeRestPasswordController::class, 'backofficeResetPassword'])->name('backoffice.password.reset')->middleware(RedirectIfAuthenticatedCustom::class);
 Route::post('/backoffice/reset-password', [BackofficeRestPasswordController::class, 'backofficePasswordUpdate'])->name('backoffice.password.update')->middleware(RedirectIfAuthenticatedCustom::class);
-
-// Mayby needed later
-//require __DIR__.'/auth.php';

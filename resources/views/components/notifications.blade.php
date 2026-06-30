@@ -8,14 +8,6 @@
         $notifications[$index]['type'] = $notification['type'] ?? 'info';
     }
 
-    if (session()->has('message')) {
-        $notifications[] = [
-            'type' => session('alert-type', 'info'),
-            'message' => session('message'),
-            'id' => uniqid('notification_', true),
-        ];
-    }
-
     foreach (['success', 'info', 'warning', 'error'] as $type) {
         if (session()->has($type)) {
             $notifications[] = [
