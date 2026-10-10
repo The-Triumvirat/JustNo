@@ -1,6 +1,38 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
+
+test('profile uploads reject scripts and SVG even with image filenames', function (string $contents) {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $temporary = tmpfile();
+    fwrite($temporary, $contents);
+    $file = new UploadedFile(stream_get_meta_data($temporary)['uri'], 'photo.png', null, null, true);
+
+    $this->actingAs($admin)->post(route('backoffice.profile.store'), [
+        'name' => $admin->name,
+        'email' => $admin->email,
+        'photo' => $file,
+    ])->assertSessionHasErrors('photo');
+    expect($admin->refresh()->photo)->toBeNull();
+})->with([
+    'PHP' => '<?php echo "unsafe"; ?>',
+    'HTML' => '<html><script>alert(1)</script></html>',
+    'SVG' => '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>',
+]);
+
+test('profile uploads reject images larger than two megabytes', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $png = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=');
+    $file = UploadedFile::fake()->createWithContent('photo.png', $png.str_repeat('x', 2048 * 1024));
+
+    $this->actingAs($admin)->post(route('backoffice.profile.store'), [
+        'name' => $admin->name,
+        'email' => $admin->email,
+        'photo' => $file,
+    ])->assertSessionHasErrors('photo');
+    expect($admin->refresh()->photo)->toBeNull();
+});
 
 test('an admin can view their backoffice profile', function () {
     $admin = User::factory()->create(['role' => 'admin']);

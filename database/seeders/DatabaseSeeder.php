@@ -15,13 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-        if (app()->isProduction()) {
-            return;
-        }
+        $this->call(UserTableSeeder::class);
 
-        $this->call([
-            UserTableSeeder::class,
-        ]);
+        if (! app()->isProduction()) {
+            $this->call(NoReasonSeeder::class);
+        }
     }
 }

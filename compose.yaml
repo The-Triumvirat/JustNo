@@ -1,0 +1,73 @@
+name: justno
+
+services:
+  init:
+    build:
+      context: .
+      target: app
+    image: justno-app:local
+    env_file: .env.docker
+    environment:
+      MARIADB_ROOT_PASSWORD: ""
+    command: ["php", "artisan", "migrate", "--force"]
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    restart: "no"
+
+  app:
+    build:
+      context: .
+      target: app
+    image: justno-app:local
+    env_file: .env.docker
+    environment:
+      MARIADB_ROOT_PASSWORD: ""
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    volumes:
+      - profile_images:/var/www/html/public/upload/profile_images
+
+  nginx:
+    build:
+      context: .
+      target: web
+    image: justno-web:local
+    depends_on:
+      - app
+    ports:
+      - "127.0.0.1:${DOCKER_HTTP_PORT:-8081}:80"
+    restart: unless-stopped
+    volumes:
+      - profile_images:/var/www/html/public/upload/profile_images:ro
+
+  mariadb:
+    image: mariadb:12.0
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE:?Set MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER:?Set MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:?Set MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?Set MARIADB_ROOT_PASSWORD}
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:
+  profile_images:

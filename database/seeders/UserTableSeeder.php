@@ -2,45 +2,39 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Database\Seeder;
+use RuntimeException;
 
 class UserTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        User::insert([
-            // Admin 
-            [
-                'name' => 'magnus',
-                'username' => 'magnus',
-                'email' => 'magnus@example.com',
-                'password' => Hash::make('robert.123'),
-                'role' => 'admin',
-                'is_active' => true,
-            ],
-            [
-                'name' => 'Admin',
-                'username' => 'admin',
-                'email' => 'admin@example.com',
-                'password' => Hash::make('robert.123'),
-                'role' => 'admin',
-                'is_active' => true,
-            ],
-            // User Data 
-            [
-                'name' => 'robert',
-                'username' => 'robert',
-                'email' => 'robert@example.com',
-                'password' => Hash::make('robert.123'),
-                'role' => 'user',
-                'is_active' => true,
-            ],
-        ]);
+        $email = config('setup.admin_email');
+        if (! is_string($email) || ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new RuntimeException('INITIAL_ADMIN_EMAIL must be a valid email address.');
+        }
+
+        $existing = User::where('email', $email)->first();
+        if ($existing) {
+            if ($existing->role !== 'admin' || ! $existing->is_active) {
+                throw new RuntimeException('The initial admin email belongs to a non-admin or inactive account.');
+            }
+
+            return;
+        }
+
+        $password = config('setup.admin_password');
+        if (! is_string($password) || strlen($password) < 24) {
+            throw new RuntimeException('Set INITIAL_ADMIN_PASSWORD to a randomly generated password of at least 24 characters.');
+        }
+
+        $admin = new User;
+        $admin->name = 'JustNo Owner';
+        $admin->email = $email;
+        $admin->password = $password;
+        $admin->role = 'admin';
+        $admin->is_active = true;
+        $admin->save();
     }
 }
