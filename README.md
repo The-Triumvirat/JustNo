@@ -28,6 +28,12 @@ authenticated backoffice for managing the reasons.
 
 The application currently uses Laravel 13, Vite 8, Tailwind CSS, and Alpine.js.
 
+PHP 8.5 is supported by the existing Composer constraint (`^8.4`). Local
+compatibility was verified with PHP 8.5.12 on 2026-10-21: all 73 tests
+(255 assertions) passed, including strict deprecation checks. PHP syntax,
+Blade compilation, and Composer platform requirements also passed. Docker
+continues to use PHP 8.4 independently of the host PHP version.
+
 ## Installation
 
 1. Install PHP dependencies:
