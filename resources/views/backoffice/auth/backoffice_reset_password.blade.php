@@ -35,7 +35,7 @@ Backoffice Reset Password
                     name="email"
                     value="{{ old('email', $request->email) }}"
                     class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2
-                           focus:ring-2 focus:ring-trium-400 outline-none
+                           focus:ring-2 focus:ring-trium-400 outline-hidden
                            @error('email') border-red-500 @enderror"
                     placeholder="john@example.com">
                 @error('email')
@@ -52,7 +52,7 @@ Backoffice Reset Password
                         type="password"
                         name="password"
                         class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2 pr-10
-                               focus:ring-2 focus:ring-trium-400 outline-none
+                               focus:ring-2 focus:ring-trium-400 outline-hidden
                                @error('password') border-red-500 @enderror"
                         placeholder="Enter new password">
                     <button type="button"
@@ -75,7 +75,7 @@ Backoffice Reset Password
                         type="password"
                         name="password_confirmation"
                         class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2 pr-10
-                               focus:ring-2 focus:ring-trium-400 outline-none
+                               focus:ring-2 focus:ring-trium-400 outline-hidden
                                @error('password_confirmation') border-red-500 @enderror"
                         placeholder="Repeat password">
                     <button type="button"

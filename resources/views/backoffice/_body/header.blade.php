@@ -64,7 +64,7 @@
                             <div class="mr-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-500/10 text-red-500">
                                 <i class='bx bx-error text-xl'></i>
                             </div>
-                            <div class="flex-grow">
+                            <div class="grow">
                                 <h6 class="text-sm font-medium text-trium-text">Test-Alarm</h6>
                                 <p class="text-xs text-trium-sub">Neue Bestellung eingegangen</p>
                             </div>
@@ -85,7 +85,7 @@
                 <button
                     @click="open = !open"
                     type="button"
-                    class="group flex items-center gap-3 focus:outline-none">
+                    class="group flex items-center gap-3 focus:outline-hidden">
                     <div class="hidden text-right sm:block">
                         <p class="text-sm font-semibold leading-tight text-trium-text transition-colors group-hover:text-trium-400">
                             {{ $profileData->name }}

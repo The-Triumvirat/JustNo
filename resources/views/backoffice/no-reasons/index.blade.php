@@ -173,7 +173,7 @@ All Just No Reasons
       deleteUrl = null;
       $nextTick(() => deleteTrigger?.focus());
     "
-    class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4"
+    class="fixed inset-0 z-100 flex items-center justify-center bg-black/70 p-4"
     role="presentation">
     <div
       x-show="deleteUrl"
@@ -193,7 +193,7 @@ All Just No Reasons
           <p id="delete-reason-description" class="mt-2 text-sm text-trium-sub">
             This action cannot be undone.
           </p>
-          <p class="mt-3 break-words text-sm font-medium text-trium-text" x-text="deleteReason"></p>
+          <p class="mt-3 wrap-break-word text-sm font-medium text-trium-text" x-text="deleteReason"></p>
         </div>
       </div>
 

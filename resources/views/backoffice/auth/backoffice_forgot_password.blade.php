@@ -31,7 +31,7 @@ Backoffice Forget Password
                     name="email"
                     value="{{ old('email') }}"
                     class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2
-                           focus:ring-2 focus:ring-trium-400 outline-none
+                           focus:ring-2 focus:ring-trium-400 outline-hidden
                            @error('login') border-red-500 @enderror"
                     placeholder="john@example.com">
                 @error('email')

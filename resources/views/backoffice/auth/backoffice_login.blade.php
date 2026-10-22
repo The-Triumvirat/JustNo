@@ -32,7 +32,7 @@ Backoffice Login
                     name="login"
                     value="{{ old('login') }}"
                     class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2
-                           focus:ring-2 focus:ring-trium-400 outline-none
+                           focus:ring-2 focus:ring-trium-400 outline-hidden
                            @error('login') border-red-500 @enderror"
                     placeholder="john@example.com">
                 @error('login')
@@ -49,7 +49,7 @@ Backoffice Login
                         type="password"
                         name="password"
                         class="w-full mt-1 bg-trium-bg2 border border-trium-border rounded-lg px-4 py-2 pr-10
-                               focus:ring-2 focus:ring-trium-400 outline-none
+                               focus:ring-2 focus:ring-trium-400 outline-hidden
                                @error('password') border-red-500 @enderror"
                         placeholder="Enter password">
 
@@ -69,7 +69,7 @@ Backoffice Login
             <div class="flex items-center justify-between text-sm">
                 <label class="flex items-center gap-2 text-trium-sub">
                     <input type="checkbox" name="remember"
-                        class="rounded border-trium-border bg-trium-bg2 text-trium-400 focus:ring-trium-400">
+                        class="rounded-sm border-trium-border bg-trium-bg2 text-trium-400 focus:ring-trium-400">
                     Remember me
                 </label>
 

@@ -1,19 +1,54 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer utilities {
-  .bg-auth-gradient {
-    background:
-      radial-gradient(
-        circle at top,
-        rgba(98, 193, 191, 0.18),
-        transparent 60%
-      ),
-      linear-gradient(
-        to bottom,
-        #0b1014,
-        #000
-      );
+@plugin '@tailwindcss/forms';
+
+@source '../../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@theme {
+  --color-trium-50: #e8f8f8;
+  --color-trium-100: #c9eeee;
+  --color-trium-200: #a8e2e1;
+  --color-trium-300: #87cfce;
+  --color-trium-400: #62c1bf;
+  --color-trium-500: #44acaa;
+
+  --color-trium-bg: #0b1014;
+  --color-trium-bg2: #0f151b;
+  --color-trium-panel: #101820;
+  --color-trium-border: #1f2a33;
+  --color-trium-text: #e6ecec;
+  --color-trium-sub: #9fb3b5;
+
+  --shadow-trium: 0 0 30px rgba(98, 193, 191, 0.25);
+  --shadow-trium-soft: 0 0 18px rgba(68, 172, 170, 0.18);
+
+  --radius-xl: 14px;
+
+  --font-sans:
+    Figtree, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
+}
+
+@utility bg-auth-gradient {
+  background:
+    radial-gradient(circle at top, rgba(98, 193, 191, 0.18), transparent 60%),
+    linear-gradient(to bottom, #0b1014, #000);
 }
